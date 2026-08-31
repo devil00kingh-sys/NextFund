@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Investor & Ecosystem Brief</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: '#F24E2B',
+            dark: '#0B0E14',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111827;
+    }
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Hero Header */
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .eyebrow-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .line {
+      height: 1px;
+      width: 50px;
+      background-color: #ff5733;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #1f2937;
+      text-transform: uppercase;
+    }
+    .main-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #000000;
+      margin-bottom: 12px;
+    }
+    .text-orange {
+      color: #ff5733;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: #4b5563;
+      margin-bottom: 24px;
+    }
+    .badge-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ff5733;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: #ffffff;
+    }
+    .badge-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: #ff5733;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    /* Map Image Container */
+    .map-section {
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    .map-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Filter Bar */
+    .filter-section {
+      margin-bottom: 24px;
+    }
+    .filter-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+    }
+    .search-input-wrapper {
+      position: relative;
+      flex: 1;
+    }
+    .search-input-wrapper svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      stroke: #9ca3af;
+      fill: none;
+      stroke-width: 2;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 12px 10px 36px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #374151;
+      outline: none;
+    }
+    .filter-select {
+      padding: 10px 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #374151;
+      background: #ffffff;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* 3-Column Profile Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4 / 4.8;
+      background-color: #f3f4f6;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 5px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Bottom CTA Box */
+    .cta-banner {
+      background-color: #050505;
+      border-radius: 12px;
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #ffffff;
+    }
+    .cta-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .cta-content p {
+      font-size: 12px;
+      color: #9ca3af;
+      max-width: 420px;
+      line-height: 1.5;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-primary {
+      background-color: #ff5733;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-secondary {
+      background-color: transparent;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased overflow-x-hidden">
+
+    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
+        <a href="index.html" class="cursor-pointer">
+            <img src="images/ChatGPT Image Aug 29, 2026, 12_24_32 PM.png" alt="NXT Fund" class="h-16 w-auto object-contain">
+        </a>
+
+        <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
+            <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="index.html">Home</a></li>
+            <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="ecosystem-directory.html">Startups</a></li>
+            <li class="border-b-2 border-[#F24E2B] text-black pb-1"><a href="investor-brief.html">Investors</a></li>
+            <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="partners.html">Partners</a></li>
+            <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="events.html">Events</a></li>
+            <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="blog-insights.html">News</a></li>
+            <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="contact-us.html">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center space-x-3">
+            <a href="yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
+                Apply for Funding
+            </a>
+            <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8h16M4 16h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <header class="hero">
+      <div class="eyebrow-container">
+        <span class="line"></span>
+        <span class="eyebrow">Global Investor & Ecosystem Brief</span>
+        <span class="line"></span>
+      </div>
+      
+      <h1 class="main-title">
+        Building the Next<br>
+        Generation of <span class="text-orange">Global</span> Companies.
+      </h1>
+
+      <p class="subtitle">
+        A Global Startup Ecosystem Connecting<br>
+        <span class="text-orange">Founders, Capital, Technology</span> &amp; Opportunity.
+      </p>
+
+      <div class="badge-btn">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        Startups from around the world can apply.
+      </div>
+    </header>
+
+    <!-- Map Graphic -->
+    <div class="map-section">
+      <!-- REPLACE WITH YOUR MAP IMAGE -->
+      <img src="YOUR_MAP_IMAGE.png" alt="Global Ecosystem Map">
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <section class="filter-section">
+      <div class="filter-label">Search Network</div>
+      <div class="filter-bar">
+        <div class="search-input-wrapper">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" placeholder="Investor name, firm, or focus...">
+        </div>
+        
+        <select class="filter-select">
+          <option>Focus Area</option>
+        </select>
+        
+        <select class="filter-select">
+          <option>Investment Stage</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Profile Cards Grid -->
+    <section class="cards-grid">
+      <div class="card">
+        <!-- REPLACE WITH YOUR IMAGE 1 -->
+        <img src="YOUR_IMAGE_1.jpg" alt="Venture Partner">
+        <span class="card-badge">Venture Partner</span>
+      </div>
+      
+      <div class="card">
+        <!-- REPLACE WITH YOUR IMAGE 2 -->
+        <img src="YOUR_IMAGE_2.jpg" alt="Strategic Angel">
+        <span class="card-badge">Strategic Angel</span>
+      </div>
+      
+      <div class="card">
+        <!-- REPLACE WITH YOUR IMAGE 3 -->
+        <img src="YOUR_IMAGE_3.jpg" alt="L.P. Partner">
+        <span class="card-badge">L.P. Partner</span>
+      </div>
+    </section>
+
+    <!-- CTA Footer Banner -->
+    <div class="cta-banner">
+      <div class="cta-content">
+        <h2>Become a Part of the<br>Inner Circle</h2>
+        <p>We are selectively expanding our network of institutional and strategic partners for the Q4 allocation period.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="#" class="btn-primary">Join the Network</a>
+        <a href="#" class="btn-secondary">Download Thesis</a>
+      </div>
+    </div>
+
+  </div>
+
+    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/footer-dark.jpg');">
+        <div class="absolute inset-0 bg-neutral-900/70"></div>
+        <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+
+            <div class="flex justify-center">
+                <img src="images/ChatGPT Image Aug 30, 2026, 10_05_37 PM.png" alt="NXT Fund" class="h-24 w-auto object-contain">
+            </div>
+
+            <p class="text-xs font-medium text-gray-400 tracking-wide">
+                Connect. <span class="text-[#F24E2B] font-semibold">Create.</span> Grow.
+            </p>
+
+            <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
+                <li><a href="#" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
+                <li class="text-gray-500">•</li>
+                <li><a href="about.html" class="hover:text-[#F24E2B] transition">About Us</a></li>
+                <li class="text-gray-500">•</li>
+                <li><a href="contact-us.html" class="hover:text-[#F24E2B] transition">Contact Us</a></li>
+                <li class="text-gray-500">•</li>
+                <li><a href="#" class="hover:text-[#F24E2B] transition">Careers</a></li>
+                <li class="text-gray-500">•</li>
+                <li><a href="#" class="hover:text-[#F24E2B] transition">Creators</a></li>
+                <li class="text-gray-500">•</li>
+                <li><a href="partners.html" class="hover:text-[#F24E2B] transition">Become a Partner</a></li>
+                <li class="text-gray-500">•</li>
+                <li><a href="#" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
+            </ul>
+
+            <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#F24E2B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>info@celebso.com</span>
+            </div>
+
+            <div class="flex justify-center gap-4 pt-2">
+                <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#F24E2B] transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5h8zm-4 6a3 3 0 100 6 3 3 0 000-6zm4.5-2.5h.01"></path></svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#F24E2B] transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                </a>
+                <a href="#" aria-label="YouTube" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#F24E2B] transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+                </a>
+                <a href="#" aria-label="Heart" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#F24E2B] transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                </a>
+            </div>
+
+            <div class="text-[11px] text-gray-500 pt-6 border-t border-gray-900">
+                © 2026 Celebso. All rights reserved.
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
