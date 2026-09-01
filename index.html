@@ -24,29 +24,112 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        /* ===== Custom Animations ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(242, 78, 43, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(242, 78, 43, 0); }
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-float { animation: float 5s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+        .animate-bounce-slow { animation: bounce-slow 2.5s ease-in-out infinite; }
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .animate-marquee { animation: marquee 25s linear infinite; }
+
+        /* Card hover lift effect */
+        .hover-lift {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Image zoom on hover */
+        .zoom-img { overflow: hidden; }
+        .zoom-img img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .zoom-img:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Gradient animated headline */
+        .gradient-text {
+            background: linear-gradient(90deg, #F24E2B, #ff8a5c, #F24E2B, #ff6b3d);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+
+        /* Button shine sweep */
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: translateX(-150%);
+            animation: shimmer 3s ease infinite;
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
 
-    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
+    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white animate-fade-in-down">
         <a href="index.html" class="cursor-pointer">
-            <img src="images/ChatGPT Image Aug 29, 2026, 12_24_32 PM.png" alt="NXT Fund" class="h-16 w-auto object-contain">
+            <img src="images/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain hover:scale-105 transition-transform duration-300">
         </a>
 
         <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
             <li class="border-b-2 border-brand text-black pb-1"><a href="index.html" class="cursor-pointer">Home</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1"><a href="ecosystem-directory.html">Startups</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1"><a href="investor-brief.html">Investors</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1"><a href="partners.html">Partners</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1"><a href="events.html">Events</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1"><a href="blog-insights.html">News</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1"><a href="contact-us.html">Contact</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="ecosystem-directory.html">Startups</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="investor-brief.html">Investors</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="partners.html">Partners</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="events.html">Events</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="blog-insights.html">News</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="contact-us.html">Contact</a></li>
         </ul>
 
         <div class="flex items-center space-x-3">
-            <a href="yc-application.html" class="bg-brand text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
+            <a href="yc-application.html" class="btn-shine bg-brand text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
                 Apply for Funding
             </a>
-            <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition">
+            <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition hover:rotate-90 duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8h16M4 16h16" />
                 </svg>
@@ -55,9 +138,11 @@
     </nav>
 
     <section class="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
-        <div class="flex flex-col lg:flex-row items-center gap-10 bg-[#f8f9fa] rounded-[40px] pl-10 lg:pl-16 pr-4 py-4">
+        <div class="flex flex-col lg:flex-row items-center gap-10 bg-[#f8f9fa] rounded-[40px] pl-10 lg:pl-16 pr-4 py-4 relative overflow-hidden">
 
-            <div class="flex-1 space-y-6 py-10 max-w-xl">
+            <div class="absolute top-10 right-10 w-40 h-40 rounded-full bg-brand/10 blur-3xl animate-float"></div>
+
+            <div class="flex-1 space-y-6 py-10 max-w-xl" data-aos="fade-right">
                 <h1 class="text-[56px] lg:text-[64px] font-extrabold leading-[1.1] tracking-tight text-black">
                     NXT turns builders <br> Into formidable founders
                 </h1>
@@ -65,7 +150,7 @@
                     Connecting visionary founders with investors, strategic partners, and growth opportunities to build the defining companies of tomorrow.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="yc-application.html" class="bg-black text-white text-[15px] font-semibold py-3.5 px-8 rounded-lg hover:bg-gray-800 transition">
+                    <a href="yc-application.html" class="btn-shine bg-black text-white text-[15px] font-semibold py-3.5 px-8 rounded-lg hover:bg-gray-800 transition">
                         Apply Now
                     </a>
                     <a href="partners.html" class="bg-transparent border-[1.5px] border-brand text-brand text-[15px] font-semibold py-3.5 px-8 rounded-lg hover:bg-orange-50 transition">
@@ -74,23 +159,22 @@
                 </div>
             </div>
 
-            <div class="flex-1 w-full relative">
-                <img src="images/ChatGPT Image Aug 29, 2026, 12_16_33 PM.png" alt="Founder" class="w-full h-auto object-cover rounded-[32px] shadow-sm">
+            <div class="flex-1 w-full relative" data-aos="fade-left" data-aos-delay="150">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_16_33 PM.png" alt="Founder" class="w-full h-auto object-cover rounded-[32px] shadow-sm zoom-img">
             </div>
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 py-12 flex flex-wrap justify-between items-center gap-x-16 gap-y-10">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_17_24 PM.png" alt="Investor 1" class="h-14 w-auto object-contain">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_19_48 PM.png" alt="Investor 2" class="h-14 w-auto object-contain">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_20_53 PM.png" alt="Investor 3" class="h-14 w-auto object-contain">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_21_48 PM.png" alt="Investor 4" class="h-14 w-auto object-contain">
+    <section class="max-w-5xl mx-auto px-6 py-12 flex flex-wrap justify-between items-center gap-x-16 gap-y-10" data-aos="fade-up" data-aos-delay="100">
+        <img src="images/ChatGPT Image Aug 29, 2026, 12_17_24 PM.png" alt="Investor 1" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
+        <img src="images/ChatGPT Image Aug 29, 2026, 12_19_48 PM.png" alt="Investor 2" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
+        <img src="images/ChatGPT Image Aug 29, 2026, 12_20_53 PM.png" alt="Investor 3" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
+        <img src="images/ChatGPT Image Aug 29, 2026, 12_21_48 PM.png" alt="Investor 4" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
     </section>
 
     <section class="max-w-[900px] mx-auto px-8 py-16 relative">
-        <span class="absolute top-20 -left-4 text-brand select-none leading-none" style="font-family:'French Script MT', 'Snell Roundhand', cursive; font-size:120px;">I</span>
 
-        <div class="space-y-8 text-[22px] font-medium leading-[1.7] text-gray-800 pl-12 relative z-10">
+        <div class="space-y-8 text-[22px] font-medium leading-[1.7] text-gray-800 pl-12 relative z-10" data-aos="fade-up">
             <p>
                 In 2025, NEXT FUND developed a new model of startup funding. Four times a year we invest up to ₹100 Crore in a select group of startups. Selected founders gain access to funding, incubation, mentorship, and an extensive investor network, while working closely with our team to get their companies into the best possible shape before presenting to a large audience of investors.
             </p>
@@ -102,24 +186,24 @@
 
     <section class="max-w-6xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row justify-between items-center border-t border-b border-gray-200 py-10">
-            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0">
-                <h3 class="text-[32px] font-bold text-brand mb-1">₹100 Cr+</h3>
+            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0" data-aos="fade-up" data-aos-delay="0">
+                <h3 class="text-[32px] font-bold text-brand mb-1 hover:scale-110 transition-transform duration-300">₹100 Cr+</h3>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Startup Fund</p>
             </div>
-            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0">
-                <h3 class="text-[32px] font-bold text-brand mb-1">500+</h3>
+            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-[32px] font-bold text-brand mb-1 hover:scale-110 transition-transform duration-300">500+</h3>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Applications Received</p>
             </div>
-            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0">
-                <h3 class="text-[32px] font-bold text-brand mb-1">100+</h3>
+            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-[32px] font-bold text-brand mb-1 hover:scale-110 transition-transform duration-300">100+</h3>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Mentors & Experts</p>
             </div>
-            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0">
-                <h3 class="text-[32px] font-bold text-brand mb-1">50+</h3>
+            <div class="text-center flex-1 w-full md:border-r border-gray-200 last:border-0 mb-6 md:mb-0" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-[32px] font-bold text-brand mb-1 hover:scale-110 transition-transform duration-300">50+</h3>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Investor Network</p>
             </div>
-            <div class="text-center flex-1 w-full">
-                <h3 class="text-[32px] font-bold text-brand mb-1">24/7</h3>
+            <div class="text-center flex-1 w-full" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="text-[32px] font-bold text-brand mb-1 hover:scale-110 transition-transform duration-300">24/7</h3>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">AI Monitoring</p>
             </div>
         </div>
@@ -127,11 +211,11 @@
 
     <section class="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-        <div class="lg:col-span-5 space-y-6">
-            <img src="images/ChatGPT Image Aug 29, 2026, 12_23_34 PM.png" alt="Building" class="w-full rounded-[20px] shadow-sm object-cover h-[320px]">
+        <div class="lg:col-span-5 space-y-6" data-aos="fade-right">
+            <img src="images/ChatGPT Image Aug 29, 2026, 12_23_34 PM.png" alt="Building" class="w-full rounded-[20px] shadow-sm object-cover h-[320px] zoom-img">
         </div>
 
-        <div class="lg:col-span-7 flex flex-col h-full pt-4">
+        <div class="lg:col-span-7 flex flex-col h-full pt-4" data-aos="fade-left">
             <h4 class="text-brand text-[11px] font-bold tracking-widest uppercase mb-4">About NXT Fund</h4>
             <h2 class="text-[44px] font-extrabold text-black mb-8 leading-tight">
                 Build For Founders<span class="text-brand">.</span>
@@ -147,9 +231,9 @@
                     </p>
                 </div>
 
-                <div class="w-full sm:w-[220px] shrink-0">
-                    <div class="bg-gray-50 border border-gray-100 rounded-[20px] p-8 text-center shadow-sm">
-                        <div class="bg-white w-14 h-14 mx-auto rounded-xl flex items-center justify-center shadow-sm mb-5">
+                <div class="w-full sm:w-[220px] shrink-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="bg-gray-50 border border-gray-100 rounded-[20px] p-8 text-center shadow-sm hover-lift">
+                        <div class="bg-white w-14 h-14 mx-auto rounded-xl flex items-center justify-center shadow-sm mb-5 animate-bounce-slow">
                             <span class="text-2xl">🚀</span>
                         </div>
                         <h5 class="font-bold text-black text-[15px] mb-3 leading-tight">Startup<br>Incubation</h5>
@@ -276,16 +360,16 @@
     </footer>
 
     <section class="max-w-6xl mx-auto px-6 py-10">
-        <div class="bg-[#0B0E14] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl">
+        <div class="bg-[#0B0E14] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl hover-lift" data-aos="zoom-in">
 
-            <div class="w-full md:w-64 h-40 shrink-0">
+            <div class="w-full md:w-64 h-40 shrink-0 zoom-img rounded-xl">
                 <!-- Replace with your event meeting image -->
                 <img src="images/ChatGPT Image Aug 29, 2026, 01_28_12 PM.png" alt="Event" class="w-full h-full object-cover rounded-xl border border-gray-800">
             </div>
 
             <div class="flex-1 text-white">
                 <div class="flex items-center gap-2 mb-2">
-                    <span class="w-2 h-2 bg-brand rounded-full"></span>
+                    <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
                     <span class="text-[10px] font-bold text-brand uppercase tracking-widest">Upcoming</span>
                 </div>
                 <h2 class="text-2xl font-bold mb-2">NXTFund Founder Meetup – Bengaluru</h2>
@@ -315,17 +399,17 @@
     <section class="max-w-6xl mx-auto px-6 pb-12">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <!-- Replace these 4 src links with your gallery images -->
-            <img src="images/ChatGPT Image Aug 29, 2026, 01_32_42 PM.png" alt="Gallery 1" class="w-full aspect-square object-cover rounded-[24px] shadow-sm">
-            <img src="images/ChatGPT Image Aug 29, 2026, 01_33_38 PM.png" alt="Gallery 2" class="w-full aspect-square object-cover rounded-[24px] shadow-sm">
-            <img src="images/ChatGPT Image Aug 29, 2026, 01_35_04 PM.png" alt="Gallery 3" class="w-full aspect-square object-cover rounded-[24px] shadow-sm">
-            <img src="images/ChatGPT Image Aug 29, 2026, 01_36_08 PM.png" alt="Gallery 4" class="w-full aspect-square object-cover rounded-[24px] shadow-sm">
+            <div class="zoom-img rounded-[24px]" data-aos="zoom-in" data-aos-delay="0"><img src="images/ChatGPT Image Aug 29, 2026, 01_32_42 PM.png" alt="Gallery 1" class="w-full aspect-square object-cover rounded-[24px] shadow-sm hover:rotate-2 transition-transform duration-300"></div>
+            <div class="zoom-img rounded-[24px]" data-aos="zoom-in" data-aos-delay="100"><img src="images/ChatGPT Image Aug 29, 2026, 01_33_38 PM.png" alt="Gallery 2" class="w-full aspect-square object-cover rounded-[24px] shadow-sm hover:-rotate-2 transition-transform duration-300"></div>
+            <div class="zoom-img rounded-[24px]" data-aos="zoom-in" data-aos-delay="200"><img src="images/ChatGPT Image Aug 29, 2026, 01_35_04 PM.png" alt="Gallery 3" class="w-full aspect-square object-cover rounded-[24px] shadow-sm hover:rotate-2 transition-transform duration-300"></div>
+            <div class="zoom-img rounded-[24px]" data-aos="zoom-in" data-aos-delay="300"><img src="images/ChatGPT Image Aug 29, 2026, 01_36_08 PM.png" alt="Gallery 4" class="w-full aspect-square object-cover rounded-[24px] shadow-sm hover:-rotate-2 transition-transform duration-300"></div>
         </div>
     </section>
 
     <section class="bg-[#F8F9FB] py-16">
         <div class="max-w-7xl mx-auto px-6">
 
-            <div class="flex justify-between items-end mb-10">
+            <div class="flex justify-between items-end mb-10" data-aos="fade-up">
                 <div>
                     <h4 class="text-brand text-[10px] font-bold tracking-widest uppercase mb-2">Portfolio Spotlight</h4>
                     <h2 class="text-4xl font-extrabold text-black tracking-tight">Featured Startups</h2>
@@ -337,7 +421,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-                <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col relative">
+                <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col relative hover-lift" data-aos="fade-right">
                     <span class="absolute top-4 right-4 bg-brand text-white text-[10px] px-3 py-1.5 rounded-full uppercase font-bold tracking-wider z-10">
                         Series A
                     </span>
@@ -357,7 +441,7 @@
 
                 <div class="lg:col-span-4 flex flex-col gap-6">
 
-                    <div class="bg-white rounded-2xl shadow-sm flex flex-1 overflow-hidden relative">
+                    <div class="bg-white rounded-2xl shadow-sm flex flex-1 overflow-hidden relative hover-lift" data-aos="fade-left" data-aos-delay="100">
                         <!-- Replace with Dashboard image -->
                         <img src="images/ChatGPT Image Aug 29, 2026, 01_41_25 PM.png" alt="FinTrack AI" class="w-[45%] object-cover">
                         <div class="p-5 flex flex-col justify-center pr-12">
@@ -374,7 +458,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-sm flex flex-1 overflow-hidden relative">
+                    <div class="bg-white rounded-2xl shadow-sm flex flex-1 overflow-hidden relative hover-lift" data-aos="fade-left" data-aos-delay="200">
                         <!-- Replace with Vertical Farming image -->
                         <img src="images/ChatGPT Image Aug 29, 2026, 01_44_16 PM.png" alt="BioBloom" class="w-[45%] object-cover">
                         <div class="p-5 flex flex-col justify-center pr-12">
@@ -397,11 +481,11 @@
     </section>
 
     <section class="max-w-6xl mx-auto px-6 py-16">
-        <div class="bg-white rounded-2xl shadow-[0_4px_40px_rgb(0,0,0,0.04)] border border-gray-100 p-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="bg-white rounded-2xl shadow-[0_4px_40px_rgb(0,0,0,0.04)] border border-gray-100 p-8 flex flex-col lg:flex-row items-center justify-between gap-8 hover-lift" data-aos="fade-up">
 
             <div class="flex items-center gap-4 lg:w-1/4">
                 <!-- Replace with Logo image -->
-                <img src="images/ChatGPT Image Aug 30, 2026, 09_46_22 PM.png" alt="Celebso" class="w-16 h-16 object-contain">
+                <img src="images/ChatGPT Image Aug 30, 2026, 09_46_22 PM.png" alt="Celebso" class="w-16 h-16 object-contain hover:rotate-6 transition-transform duration-500">
                 <div>
                     <h3 class="text-xl font-bold leading-tight text-black">Celebso<br>Startup School</h3>
                     <p class="text-xs text-gray-500 mt-1 font-medium">by <span class="text-brand font-bold">Celebso Group</span></p>
@@ -438,7 +522,7 @@
             </div>
 
             <div class="text-center lg:w-1/5">
-                <a href="yc-application.html" class="border border-brand text-brand hover:bg-brand hover:text-white transition-colors duration-300 text-sm font-semibold py-2.5 px-6 rounded-lg w-full flex justify-center items-center gap-2">
+                <a href="school.html" class="border border-brand text-brand hover:bg-brand hover:text-white transition-colors duration-300 text-sm font-semibold py-2.5 px-6 rounded-lg w-full flex justify-center items-center gap-2">
                     Apply Now <span>&rarr;</span>
                 </a>
                 <p class="text-[10px] text-gray-500 font-semibold mt-3">Join. Learn. Grow.</p>
@@ -450,7 +534,7 @@
     <section class="bg-[#0B0E14] text-white py-20 px-6">
         <div class="max-w-6xl mx-auto">
 
-            <div class="mb-16">
+            <div class="mb-16" data-aos="fade-up">
                 <span class="text-brand text-[10px] font-bold tracking-widest uppercase block mb-3">Our Ecosystem</span>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Why Founders Choose<br>NXTFund</h2>
                 <p class="text-gray-400 text-sm md:text-base max-w-xl leading-relaxed">
@@ -460,48 +544,48 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
 
-                <div class="space-y-3">
-                    <div class="text-brand text-2xl mb-4">👥</div>
+                <div class="space-y-3 hover-lift p-4 rounded-2xl hover:bg-white/5" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="text-brand text-2xl mb-4 inline-block animate-bounce-slow">👥</div>
                     <h3 class="text-lg font-bold">Investor Access</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         Direct lines to Tier-1 VCs and family offices across the globe, facilitating high-speed capital raises.
                     </p>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="text-brand text-2xl mb-4">🤝</div>
+                <div class="space-y-3 hover-lift p-4 rounded-2xl hover:bg-white/5" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="text-brand text-2xl mb-4 inline-block animate-bounce-slow" style="animation-delay:0.2s">🤝</div>
                     <h3 class="text-lg font-bold">Strategic Partnerships</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         Curated introductions to Fortune 500 decision-makers and high-value distribution channels.
                     </p>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="text-brand text-2xl mb-4">📈</div>
+                <div class="space-y-3 hover-lift p-4 rounded-2xl hover:bg-white/5" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="text-brand text-2xl mb-4 inline-block animate-bounce-slow" style="animation-delay:0.4s">📈</div>
                     <h3 class="text-lg font-bold">Growth Advisory</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         Hands-on GTM strategies and operational scaling from partners who have built unicorns.
                     </p>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="text-brand text-2xl mb-4">🎓</div>
+                <div class="space-y-3 hover-lift p-4 rounded-2xl hover:bg-white/5" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="text-brand text-2xl mb-4 inline-block animate-bounce-slow" style="animation-delay:0.1s">🎓</div>
                     <h3 class="text-lg font-bold">Founder Education</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         Workshops, masterclasses, and 1:1 mentorship to help founders grow smarter and faster.
                     </p>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="text-brand text-2xl mb-4">🌐</div>
+                <div class="space-y-3 hover-lift p-4 rounded-2xl hover:bg-white/5" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="text-brand text-2xl mb-4 inline-block animate-bounce-slow" style="animation-delay:0.3s">🌐</div>
                     <h3 class="text-lg font-bold">Global Network</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         Tap into a global network of founders, investors, operators, and industry experts.
                     </p>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="text-brand text-2xl mb-4">🛡️</div>
+                <div class="space-y-3 hover-lift p-4 rounded-2xl hover:bg-white/5" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="text-brand text-2xl mb-4 inline-block animate-bounce-slow" style="animation-delay:0.5s">🛡️</div>
                     <h3 class="text-lg font-bold">Talent Sourcing</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         Access top-tier talent to build, scale, and lead your vision to market leadership.
@@ -516,17 +600,17 @@
     <section class="py-20 px-6 bg-white">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-            <div class="lg:col-span-6 relative">
+            <div class="lg:col-span-6 relative" data-aos="fade-right">
                 <!-- Replace with your architecture/team building image -->
-                <img src="images/ChatGPT Image Aug 30, 2026, 09_50_43 PM.png" alt="Success Story" class="w-full rounded-2xl shadow-sm object-cover h-[420px]">
+                <img src="images/ChatGPT Image Aug 30, 2026, 09_50_43 PM.png" alt="Success Story" class="w-full rounded-2xl shadow-sm object-cover h-[420px] zoom-img">
 
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl shadow-lg border border-gray-100 text-center">
+                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl shadow-lg border border-gray-100 text-center animate-float">
                     <span class="text-2xl font-black text-brand tracking-tight block">12x</span>
                     <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Avg. ROI</span>
                 </div>
             </div>
 
-            <div class="lg:col-span-6 space-y-6">
+            <div class="lg:col-span-6 space-y-6" data-aos="fade-left">
                 <span class="text-brand text-[10px] font-bold tracking-widest uppercase block">Success Stories</span>
 
                 <h2 class="text-4xl font-extrabold text-black tracking-tight">From Vision to Velocity</h2>
@@ -580,7 +664,7 @@
     </section>
 
     <section class="max-w-7xl mx-auto px-6 py-16">
-        <div class="flex justify-between items-center mb-10">
+        <div class="flex justify-between items-center mb-10" data-aos="fade-up">
             <h2 class="text-3xl font-bold tracking-tight text-black">Latest News</h2>
             <a href="blog-insights.html" class="text-xs font-bold text-brand flex items-center gap-1 hover:underline">
                 View All Press &rarr;
@@ -589,7 +673,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <div class="border-b border-gray-200 pb-6">
+            <div class="border-b border-gray-200 pb-6 hover:pl-4 transition-all duration-300 hover:border-brand hover:shadow-sm rounded" data-aos="fade-up" data-aos-delay="0">
                 <p class="text-[11px] font-semibold text-gray-400 mb-2">March 15, 2024</p>
                 <h3 class="font-bold text-base text-black mb-4 leading-snug">CelebsoX Announces Delhi Fashion Runway</h3>
                 <a href="#" class="text-xs font-bold text-brand flex items-center gap-1 hover:underline">
@@ -597,7 +681,7 @@
                 </a>
             </div>
 
-            <div class="border-b border-gray-200 pb-6">
+            <div class="border-b border-gray-200 pb-6 hover:pl-4 transition-all duration-300 hover:border-brand hover:shadow-sm rounded" data-aos="fade-up" data-aos-delay="100">
                 <p class="text-[11px] font-semibold text-gray-400 mb-2">March 10, 2024</p>
                 <h3 class="font-bold text-base text-black mb-4 leading-snug">Celebso Group Expands Into AI Ecosystem</h3>
                 <a href="#" class="text-xs font-bold text-brand flex items-center gap-1 hover:underline">
@@ -605,7 +689,7 @@
                 </a>
             </div>
 
-            <div class="border-b border-gray-200 pb-6">
+            <div class="border-b border-gray-200 pb-6 hover:pl-4 transition-all duration-300 hover:border-brand hover:shadow-sm rounded" data-aos="fade-up" data-aos-delay="200">
                 <p class="text-[11px] font-semibold text-gray-400 mb-2">March 5, 2024</p>
                 <h3 class="font-bold text-base text-black mb-4 leading-snug">Celebso Launches Founder Growth Platform</h3>
                 <a href="#" class="text-xs font-bold text-brand flex items-center gap-1 hover:underline">
@@ -641,12 +725,12 @@
         </div>
     </section>
 
-    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/footer-dark.jpg');">
+    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/ChatGPT Image Sep 1, 2026, 09_53_04 PM.png');">
         <div class="absolute inset-0 bg-neutral-900/70"></div>
         <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
 
             <div class="flex justify-center">
-<img src="images/ChatGPT Image Aug 30, 2026, 10_05_37 PM.png" alt="NXT Fund" class="h-24 w-auto object-contain">
+<img src="images/log1.png" alt="NXT Fund" class="h-24 w-auto object-contain">
             </div>
 
             <p class="text-xs font-medium text-gray-400 tracking-wide">
@@ -654,19 +738,15 @@
             </p>
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
-                <li><a href="#" class="hover:text-brand transition">Terms & Privacy</a></li>
+                <li><a href="terms-privacy.html" class="hover:text-brand transition">Terms & Privacy</a></li>
                 <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-brand transition">About Us</a></li>
                 <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-brand transition">Contact Us</a></li>
                 <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-brand transition">Careers</a></li>
+                <li><a href="partners.html" class="hover:text-brand transition">Become a Partner</a></li>
                 <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-brand transition">Creators</a></li>
-                <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-brand transition">Become a Partner</a></li>
-                <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-brand transition">Help & Support</a></li>
+                <li><a href="help-support.html" class="hover:text-brand transition">Help & Support</a></li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
@@ -698,5 +778,14 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 80
+        });
+    </script>
 </body>
 </html>

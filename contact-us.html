@@ -6,6 +6,7 @@
     <title>NXTFund - Contact Us</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -30,13 +31,47 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
+
+        /* ===== Custom Animations ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(300%); }
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 5s ease-in-out infinite; }
+        .animate-bounce-slow { animation: bounce-slow 2.5s ease-in-out infinite; }
+        .hover-lift {
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: translateX(-150%);
+            animation: shimmer 3s ease infinite;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 antialiased selection:bg-brand-red selection:text-white">
 
     <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
         <a href="index.html" class="cursor-pointer">
-            <img src="images/ChatGPT Image Aug 29, 2026, 12_24_32 PM.png" alt="NXT Fund" class="h-16 w-auto object-contain">
+            <img src="images/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain">
         </a>
 
         <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
@@ -50,10 +85,10 @@
         </ul>
 
         <div class="flex items-center space-x-3">
-            <a href="yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
+            <a href="yc-application.html" class="btn-shine bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
                 Apply for Funding
             </a>
-            <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition">
+            <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition hover:rotate-90 duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8h16M4 16h16" />
                 </svg>
@@ -63,7 +98,7 @@
 
     <section class="bg-gradient-to-b from-brand-lightRed/60 via-brand-lightRed/30 to-white py-14 px-6 lg:px-12 relative overflow-hidden">
         <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between">
-            <div class="max-w-lg mb-8 md:mb-0">
+            <div class="max-w-lg mb-8 md:mb-0" data-aos="fade-right">
                 <span class="text-brand-red font-bold text-xs tracking-wider uppercase mb-2 block">CONTACT US</span>
                 <h1 class="text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight leading-tight mb-4">
                     Let's Build the<br>Future <span class="text-brand-red">Together.</span>
@@ -73,8 +108,8 @@
                 </p>
             </div>
             
-            <div class="relative w-full max-w-md h-48 flex items-center justify-center">
-                <div class="relative">
+            <div class="relative w-full max-w-md h-48 flex items-center justify-center" data-aos="fade-left" data-aos-delay="150">
+                <div class="relative animate-float">
                     <div class="w-48 h-32 bg-orange-100 border-2 border-brand-red/20 rounded-2xl rotate-[-6deg] p-4 flex flex-col justify-between shadow-lg relative bg-gradient-to-br from-orange-50 to-orange-100">
                         <div class="w-full h-2 bg-white rounded"></div>
                         <div class="w-2/3 h-2 bg-white rounded"></div>
@@ -98,18 +133,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             <div class="lg:col-span-5 space-y-6">
-                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-center mb-6 py-4 bg-brand-lightRed/40 rounded-xl">
-                        <svg class="w-40 h-24 text-brand-red" viewBox="0 0 200 100" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M 20 90 L 20 20 M 180 90 L 180 20" stroke-width="4"/>
-                            <path d="M 10 90 H 190"/>
-                            <path d="M 20 30 Q 100 70 180 30"/>
-                            <path d="M 20 20 L 20 10 M 180 20 L 180 10"/>
-                            <line x1="50" y1="46" x2="50" y2="90" stroke-dasharray="2 2"/>
-                            <line x1="80" y1="58" x2="80" y2="90" stroke-dasharray="2 2"/>
-                            <line x1="120" y1="58" x2="120" y2="90" stroke-dasharray="2 2"/>
-                            <line x1="150" y1="46" x2="150" y2="90" stroke-dasharray="2 2"/>
-                        </svg>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow hover-lift" data-aos="fade-up" data-aos-delay="0">
+<div class="flex items-center justify-center mb-6 py-4 bg-brand-lightRed/40 rounded-xl">
+                        <img src="images/ChatGPT Image Sep 1, 2026, 10_15_34 AM.png" alt="San Francisco" class="w-40 h-24 object-contain">
                     </div>
                     <h3 class="font-bold text-brand-red text-sm tracking-wide mb-4">SAN FRANCISCO, USA</h3>
                     <div class="space-y-3 text-xs md:text-sm text-gray-600">
@@ -124,19 +150,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-center mb-6 py-4 bg-brand-lightRed/40 rounded-xl">
-                        <svg class="w-40 h-28 text-brand-red" viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="30" y="30" width="140" height="80" rx="2"/>
-                            <path d="M 30 30 Q 100 0 170 30"/>
-                            <path d="M 50 30 V 110 M 80 20 V 110 M 120 20 V 110 M 150 30 V 110"/>
-                            <circle cx="100" cy="45" r="5"/>
-                            <circle cx="65" cy="55" r="4"/>
-                            <circle cx="135" cy="55" r="4"/>
-                            <circle cx="100" cy="75" r="5"/>
-                            <circle cx="65" cy="85" r="4"/>
-                            <circle cx="135" cy="85" r="4"/>
-                        </svg>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow hover-lift" data-aos="fade-up" data-aos-delay="150">
+<div class="flex items-center justify-center mb-6 py-4 bg-brand-lightRed/40 rounded-xl">
+                        <img src="images/ChatGPT Image Sep 1, 2026, 10_18_26 AM.png" alt="Jaipur Office" class="w-40 h-28 object-contain">
                     </div>
                     <h3 class="font-bold text-brand-red text-sm tracking-wide mb-4 leading-snug">
                         CELEBSO STARTUP VALLEY<br>JAIPUR, LAL KOTHI<br>SIGNATURE TOWER,
@@ -167,7 +183,7 @@
             </div>
 
             <div class="lg:col-span-7">
-                <div class="bg-white border border-gray-100 rounded-2xl p-6 lg:p-8 shadow-sm">
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 lg:p-8 shadow-sm" data-aos="fade-left" data-aos-delay="100">
                     <form class="space-y-5" onsubmit="event.preventDefault();">
                         
                         <div>
@@ -250,7 +266,7 @@
     </section>
 
     <section class="max-w-[1200px] mx-auto px-6 lg:px-12 py-12">
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center justify-between mb-8" data-aos="fade-up">
             <div>
                 <span class="text-brand-red font-bold text-xs tracking-wider uppercase mb-1 block">FAQS</span>
                 <h2 class="text-2xl lg:text-3xl font-extrabold text-brand-dark">Frequently Asked Questions</h2>
@@ -263,7 +279,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="0">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-regular fa-circle-question"></i>
@@ -273,7 +289,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="50">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-building text-xs"></i>
@@ -283,7 +299,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-regular fa-user"></i>
@@ -293,7 +309,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="150">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-chart-pie"></i>
@@ -303,7 +319,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-location-dot"></i>
@@ -313,7 +329,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="250">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-credit-card"></i>
@@ -323,7 +339,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="300">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-regular fa-clipboard"></i>
@@ -333,7 +349,7 @@
                 <i class="fa-solid fa-plus text-xs text-gray-400"></i>
             </div>
 
-            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer">
+            <div class="border border-gray-100 rounded-xl p-4 bg-white flex items-center justify-between shadow-sm hover:border-brand-red/30 transition-all cursor-pointer hover-lift" data-aos="fade-up" data-aos-delay="350">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-brand-lightRed text-brand-red flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -346,12 +362,12 @@
         </div>
     </section>
 
-    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/footer-dark.jpg');">
+    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/ChatGPT Image Sep 1, 2026, 09_53_04 PM.png');">
         <div class="absolute inset-0 bg-neutral-900/70"></div>
         <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
 
             <div class="flex justify-center">
-                <img src="images/ChatGPT Image Aug 30, 2026, 10_05_37 PM.png" alt="NXT Fund" class="h-24 w-auto object-contain">
+                <img src="images/log1.png" alt="NXT Fund" class="h-24 w-auto object-contain">
             </div>
 
             <p class="text-xs font-medium text-gray-400 tracking-wide">
@@ -359,19 +375,15 @@
             </p>
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
+                <li><a href="terms-privacy.html" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
                 <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-[#F24E2B] transition">About Us</a></li>
                 <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-[#F24E2B] transition">Contact Us</a></li>
                 <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Careers</a></li>
-                <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Creators</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="partners.html" class="hover:text-[#F24E2B] transition">Become a Partner</a></li>
                 <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
+                <li><a href="help-support.html" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
@@ -403,5 +415,14 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 80
+        });
+    </script>
 </body>
 </html>

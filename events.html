@@ -6,6 +6,7 @@
     <title>NXTFund - Events</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <script>
         tailwind.config = {
             theme: {
@@ -465,13 +466,45 @@
             color: var(--text-muted);
             font-size: 12px;
         }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(300%); }
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 5s ease-in-out infinite; }
+        .animate-bounce-slow { animation: bounce-slow 2.5s ease-in-out infinite; }
+        .hover-lift {
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: translateX(-150%);
+            animation: shimmer 3s ease infinite;
+        }
     </style>
 </head>
 <body>
 
     <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
         <a href="index.html" class="cursor-pointer">
-            <img src="images/ChatGPT Image Aug 29, 2026, 12_24_32 PM.png" alt="NXT Fund" class="h-16 w-auto object-contain">
+            <img src="images/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain hover:scale-105 transition-transform duration-300">
         </a>
 
         <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
@@ -485,7 +518,7 @@
         </ul>
 
         <div class="flex items-center space-x-3">
-            <a href="yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
+            <a href="yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition btn-shine">
                 Apply for Funding
             </a>
             <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition">
@@ -498,24 +531,24 @@
 
     <main class="container">
         <section class="hero">
-            <div class="hero-text">
-                <div class="hero-tag">Events</div>
+            <div class="hero-text" data-aos="fade-up">
+                <div class="hero-tag animate-bounce-slow">Events</div>
                 <h1>Events That Inspire and Connect</h1>
                 <p>Join our curated events, webinars and meetups to learn, network and grow.</p>
             </div>
-            <div class="hero-image">
-                <img src="https://placehold.co/400x250/fff3f0/F15A2B?text=3D+Calendar+Illustration" alt="Events Illustration">
+            <div class="hero-image" data-aos="fade-right">
+                <img src="images/ChatGPT Image Sep 1, 2026, 09_57_08 AM.png" alt="Events Illustration">
             </div>
         </section>
 
-        <section class="tabs">
+        <section class="tabs" data-aos="fade-up" data-aos-delay="50">
             <div class="tab active">Upcoming Events</div>
             <div class="tab">Past Events</div>
         </section>
 
         <section class="event-list">
             
-            <div class="event-card">
+            <div class="event-card hover-lift" data-aos="fade-up" data-aos-delay="0">
                 <div class="event-date">
                     <span class="date-month">Aug</span>
                     <span class="date-day">20</span>
@@ -534,7 +567,7 @@
                 </div>
             </div>
 
-            <div class="event-card">
+            <div class="event-card hover-lift" data-aos="fade-up" data-aos-delay="100">
                 <div class="event-date">
                     <span class="date-month">Sep</span>
                     <span class="date-day">05</span>
@@ -553,7 +586,7 @@
                 </div>
             </div>
 
-            <div class="event-card">
+            <div class="event-card hover-lift" data-aos="fade-up" data-aos-delay="200">
                 <div class="event-date">
                     <span class="date-month">Sep</span>
                     <span class="date-day">18</span>
@@ -574,9 +607,9 @@
 
         </section>
 
-        <section class="newsletter">
+        <section class="newsletter" data-aos="fade-up">
             <div class="newsletter-info">
-                <div class="icon-circle">
+                <div class="icon-circle animate-float">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 </div>
                 <div class="newsletter-text">
@@ -586,17 +619,17 @@
             </div>
             <div class="newsletter-form">
                 <input type="email" placeholder="Enter your email">
-                <button class="btn">Subscribe</button>
+                <button class="btn btn-shine">Subscribe</button>
             </div>
         </section>
     </main>
 
-        <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/footer-dark.jpg');">
+        <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/ChatGPT Image Sep 1, 2026, 09_53_04 PM.png');">
         <div class="absolute inset-0 bg-neutral-900/70"></div>
         <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
 
-            <div class="flex justify-center">
-                <img src="images/ChatGPT Image Aug 30, 2026, 10_05_37 PM.png" alt="NXT Fund" class="h-24 w-auto object-contain">
+            <div class="flex justify-center" data-aos="fade-up">
+                <img src="images/log1.png" alt="NXT Fund" class="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300">
             </div>
 
             <p class="text-xs font-medium text-gray-400 tracking-wide">
@@ -604,19 +637,15 @@
             </p>
 
             <ul class="flex flex-wrap justify-center gap-6 text-xs text-gray-300 font-medium">
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
+                <li><a href="terms-privacy.html" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
                 <li>•</li>
                 <li><a href="about.html" class="hover:text-[#F24E2B] transition">About Us</a></li>
                 <li>•</li>
                 <li><a href="contact-us.html" class="hover:text-[#F24E2B] transition">Contact Us</a></li>
                 <li>•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Careers</a></li>
-                <li>•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Creators</a></li>
-                <li>•</li>
                 <li><a href="partners.html" class="hover:text-[#F24E2B] transition">Become a Partner</a></li>
                 <li>•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
+                <li><a href="help-support.html" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
@@ -626,7 +655,7 @@
                 <span>info@celebso.com</span>
             </div>
 
-            <div class="flex justify-center gap-4 pt-2">
+            <div class="flex justify-center gap-4 pt-2" data-aos="fade-up" data-aos-delay="100">
                 <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#F24E2B] transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5h8zm-4 6a3 3 0 100 6 3 3 0 000-6zm4.5-2.5h.01"></path></svg>
                 </a>
@@ -648,5 +677,14 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 80
+        });
+    </script>
 </body>
 </html>

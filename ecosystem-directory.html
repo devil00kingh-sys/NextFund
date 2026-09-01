@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <script>
     tailwind.config = {
       theme: {
@@ -339,13 +340,45 @@
     .footer-right {
       color: #ff5733;
     }
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-12px); }
+    }
+    @keyframes shimmer {
+        0% { transform: translateX(-150%); }
+        100% { transform: translateX(300%); }
+    }
+    @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+    .animate-float { animation: float 5s ease-in-out infinite; }
+    .animate-bounce-slow { animation: bounce-slow 2.5s ease-in-out infinite; }
+    .hover-lift {
+        transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .hover-lift:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .btn-shine { position: relative; overflow: hidden; }
+    .btn-shine::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+        transform: translateX(-150%);
+        animation: shimmer 3s ease infinite;
+    }
   </style>
 </head>
 <body>
 
     <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
         <a href="index.html" class="cursor-pointer">
-            <img src="images/ChatGPT Image Aug 29, 2026, 12_24_32 PM.png" alt="NXT Fund" class="h-16 w-auto object-contain">
+            <img src="images/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain hover:scale-105 transition-transform duration-300">
         </a>
 
         <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
@@ -359,7 +392,7 @@
         </ul>
 
         <div class="flex items-center space-x-3">
-            <a href="yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
+            <a href="yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition btn-shine">
                 Apply for Funding
             </a>
             <button class="bg-[#3a3532] text-white p-2.5 rounded-md flex items-center justify-center hover:bg-gray-800 transition">
@@ -372,7 +405,7 @@
 
   <div class="container">
     
-    <header class="header-section">
+<header class="header-section" data-aos="fade-up">
       <div class="eyebrow">ECOSYSTEM DIRECTORY</div>
       <h1 class="main-title">
         Empowering The<br>
@@ -383,10 +416,10 @@
         Discover the innovative startups backed by NXTFund.<br>
         Building solutions for a better tomorrow.
       </p>
-      <div class="map-bg"></div>
+      <img src="images/ChatGPT Image Sep 1, 2026, 09_58_49 AM.png" alt="Ecosystem" class="absolute top-0 right-0 w-[600px] h-[240px] object-contain opacity-90 rounded-lg pointer-events-none animate-float" data-aos="fade-left">
     </header>
 
-    <section class="filters-section">
+    <section class="filters-section" data-aos="fade-up" data-aos-delay="100">
       <div class="search-row">
         <div class="search-input-wrapper">
           <svg viewBox="0 0 24 24">
@@ -423,14 +456,14 @@
       </div>
     </section>
 
-    <div class="results-bar">
+<div class="results-bar" data-aos="fade-up">
       <span class="count-text">24 Startups Found</span>
       <span class="sort-text">Sort by: <strong>Latest Investment ▾</strong></span>
     </div>
 
     <main class="grid">
-      
-      <div class="card">
+
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="0">
         <div class="card-top">
           <div class="logo-box" style="background:#090d16;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5733" stroke-width="2.5"><path d="M4 20L20 4M4 4l8 8"/></svg>
@@ -453,7 +486,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="100">
         <div class="card-top">
           <div class="logo-box" style="background:#090d16;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -476,7 +509,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="200">
         <div class="card-top">
           <div class="logo-box" style="background:#090d16;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -499,7 +532,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="300">
         <div class="card-top">
           <div class="logo-box" style="background:#082813;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.1 2 7 0 6-4.5 11-10 11z"/></svg>
@@ -522,7 +555,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="400">
         <div class="card-top">
           <div class="logo-box" style="background:#082020;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -545,7 +578,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="500">
         <div class="card-top">
           <div class="logo-box" style="background:#ff5733;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -568,7 +601,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="600">
         <div class="card-top">
           <div class="logo-box" style="background:#312e81;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
@@ -591,7 +624,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="700">
         <div class="card-top">
           <div class="logo-box" style="background:#f59e0b;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
@@ -614,7 +647,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card hover-lift" data-aos="fade-up" data-aos-delay="800">
         <div class="card-top">
           <div class="logo-box" style="background:#1e3a8a;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><path d="M7 17L17 7M11 17l6-6"/></svg>
@@ -639,9 +672,9 @@
 
     </main>
 
-    <div class="cta-banner">
+<div class="cta-banner" data-aos="fade-up">
       <div class="cta-left">
-        <div class="cta-icon">
+        <div class="cta-icon animate-bounce-slow">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
@@ -655,7 +688,7 @@
         </div>
       </div>
       <div class="cta-buttons">
-        <a href="#" class="btn-orange">Join the Network</a>
+        <a href="#" class="btn-orange btn-shine">Join the Network</a>
         <a href="#" class="btn-outline">Download Thesis</a>
       </div>
     </div>
@@ -692,12 +725,12 @@
         </div>
     </footer>
 
-    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/footer-dark.jpg');">
+    <footer class="bg-[#0B0E14] text-white pt-16 pb-10 px-6 mt-12 relative overflow-hidden bg-cover bg-center" style="background-image:url('images/ChatGPT Image Sep 1, 2026, 09_53_04 PM.png');">
         <div class="absolute inset-0 bg-neutral-900/70"></div>
         <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
 
             <div class="flex justify-center">
-                <img src="images/ChatGPT Image Aug 30, 2026, 10_05_37 PM.png" alt="NXT Fund" class="h-24 w-auto object-contain">
+                <img src="images/log1.png" alt="NXT Fund" class="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300">
             </div>
 
             <p class="text-xs font-medium text-gray-400 tracking-wide">
@@ -705,19 +738,15 @@
             </p>
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
+                <li><a href="terms-privacy.html" class="hover:text-[#F24E2B] transition">Terms & Privacy</a></li>
                 <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-[#F24E2B] transition">About Us</a></li>
                 <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-[#F24E2B] transition">Contact Us</a></li>
                 <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Careers</a></li>
-                <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Creators</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="partners.html" class="hover:text-[#F24E2B] transition">Become a Partner</a></li>
                 <li class="text-gray-500">•</li>
-                <li><a href="#" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
+                <li><a href="help-support.html" class="hover:text-[#F24E2B] transition">Help & Support</a></li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
@@ -749,5 +778,14 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 80
+        });
+    </script>
 </body>
 </html>
