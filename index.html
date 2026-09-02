@@ -56,6 +56,45 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-word {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .fade-word:nth-child(1)  { animation-delay: 0.1s; }
+        .fade-word:nth-child(2)  { animation-delay: 0.2s; }
+        .fade-word:nth-child(3)  { animation-delay: 0.3s; }
+        .fade-word:nth-child(4)  { animation-delay: 0.4s; }
+        .fade-word:nth-child(5)  { animation-delay: 0.5s; }
+        .fade-word:nth-child(6)  { animation-delay: 0.6s; }
+        .fade-word:nth-child(7)  { animation-delay: 0.7s; }
+        .fade-word:nth-child(8)  { animation-delay: 0.8s; }
+
+        /* Investor marquee */
+        .investor-marquee {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 20s linear infinite;
+        }
+        .investor-marquee:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marqueeScroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .investor-marquee img {
+            transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+        }
+        .investor-marquee img:hover {
+            transform: scale(1.15) rotate(-3deg);
+            filter: grayscale(0) drop-shadow(0 0 8px rgba(242,78,43,0.5));
+            opacity: 1;
+        }
 
         .animate-float { animation: float 5s ease-in-out infinite; }
         .animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
@@ -117,7 +156,7 @@
 
         <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
             <li class="border-b-2 border-brand text-black pb-1"><a href="index.html" class="cursor-pointer">Home</a></li>
-            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="ecosystem-directory.html">Startups</a></li>
+            <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="gemini-code-1788375852909.html">Startups</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="investor-brief.html">Investors</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="partners.html">Partners</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="events.html">Events</a></li>
@@ -143,8 +182,14 @@
             <div class="absolute top-10 right-10 w-40 h-40 rounded-full bg-brand/10 blur-3xl animate-float"></div>
 
             <div class="flex-1 space-y-6 py-10 max-w-xl" data-aos="fade-right">
-                <h1 class="text-[56px] lg:text-[64px] font-extrabold leading-[1.1] tracking-tight text-black">
-                    NXT turns builders <br> Into formidable founders
+                <h1 class="text-[40px] lg:text-[48px] font-extrabold leading-[1.1] tracking-tight text-black">
+                    <span class="fade-word">N<span class="text-brand">X</span>T</span>
+                    <span class="fade-word">turns</span>
+                    <span class="fade-word">builders</span>
+                    <br>
+                    <span class="fade-word">Into</span>
+                    <span class="fade-word">formidable</span>
+                    <span class="fade-word">founders</span>
                 </h1>
                 <p class="text-gray-700 text-[17px] leading-relaxed pr-8">
                     Connecting visionary founders with investors, strategic partners, and growth opportunities to build the defining companies of tomorrow.
@@ -165,21 +210,32 @@
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 py-12 flex flex-wrap justify-between items-center gap-x-16 gap-y-10" data-aos="fade-up" data-aos-delay="100">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_17_24 PM.png" alt="Investor 1" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_19_48 PM.png" alt="Investor 2" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_20_53 PM.png" alt="Investor 3" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
-        <img src="images/ChatGPT Image Aug 29, 2026, 12_21_48 PM.png" alt="Investor 4" class="h-14 w-auto object-contain hover:scale-110 hover:grayscale-0 grayscale transition-all duration-500">
+    <section class="py-10 overflow-hidden bg-white relative">
+        <div class="overflow-hidden">
+            <div class="investor-marquee">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_17_24 PM.png" alt="Investor 1" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_19_48 PM.png" alt="Investor 2" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_20_53 PM.png" alt="Investor 3" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_21_48 PM.png" alt="Investor 4" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <!-- Duplicate set for seamless loop -->
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_17_24 PM.png" alt="Investor 1" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_19_48 PM.png" alt="Investor 2" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_20_53 PM.png" alt="Investor 3" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+                <img src="images/ChatGPT Image Aug 29, 2026, 12_21_48 PM.png" alt="Investor 4" class="h-14 w-auto object-contain mx-10 transition-all duration-500">
+            </div>
+        </div>
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-20"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-20"></div>
     </section>
 
     <section class="max-w-[900px] mx-auto px-8 py-16 relative">
 
         <div class="space-y-8 text-[22px] font-medium leading-[1.7] text-gray-800 pl-12 relative z-10" data-aos="fade-up">
             <p>
-                In 2025, NEXT FUND developed a new model of startup funding. Four times a year we invest up to ₹100 Crore in a select group of startups. Selected founders gain access to funding, incubation, mentorship, and an extensive investor network, while working closely with our team to get their companies into the best possible shape before presenting to a large audience of investors.
+                In 2025, N<span class="text-brand">X</span>T FUND developed a new model of startup funding. Four times a year we invest up to ₹100 Crore in a select group of startups. Selected founders gain access to funding, incubation, mentorship, and an extensive investor network, while working closely with our team to get their companies into the best possible shape before presenting to a large audience of investors.
             </p>
             <p>
-                But NEXT FUND doesn't end with funding. We and the NEXT FUND founder network continue to help founders build, scale, raise capital, and grow their companies for the long term — and beyond.
+                But N<span class="text-brand">X</span>T FUND doesn't end with funding. We and the N<span class="text-brand">X</span>T FUND founder network continue to help founders build, scale, raise capital, and grow their companies for the long term — and beyond.
             </p>
         </div>
     </section>
@@ -426,7 +482,7 @@
                         Series A
                     </span>
                     <!-- Replace with CPU/Quantum image -->
-                    <img src="images/ChatGPT Image Aug 29, 2026, 01_40_09 PM.png" alt="Quantum Dynamics" class="w-full h-[340px] object-cover">
+                    <img src="images/Gemini_Generated_Image_e35bd6e35bd6e35b.png" alt="Quantum Dynamics" class="w-full h-[340px] object-cover">
                     <div class="p-8 flex-1 flex flex-col justify-center">
                         <h3 class="text-2xl font-bold text-black mb-2">Quantum Dynamics</h3>
                         <p class="text-gray-500 text-sm leading-relaxed max-w-xl">
@@ -443,7 +499,7 @@
 
                     <div class="bg-white rounded-2xl shadow-sm flex flex-1 overflow-hidden relative hover-lift" data-aos="fade-left" data-aos-delay="100">
                         <!-- Replace with Dashboard image -->
-                        <img src="images/ChatGPT Image Aug 29, 2026, 01_41_25 PM.png" alt="FinTrack AI" class="w-[45%] object-cover">
+                        <img src="images/Gemini_Generated_Image_f7jqlof7jqlof7jq.png" alt="FinTrack AI" class="w-[45%] object-cover">
                         <div class="p-5 flex flex-col justify-center pr-12">
                             <h3 class="text-lg font-bold text-black mb-1.5">FinTrack AI</h3>
                             <p class="text-xs text-gray-500 leading-relaxed">
@@ -655,11 +711,11 @@
     <section class="max-w-7xl mx-auto px-6 py-8">
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
             <!-- Replace these 5 image sources -->
-            <img src="images/ChatGPT Image Aug 30, 2026, 09_54_10 PM.png" alt="Event 1" class="w-full h-48 object-cover rounded-2xl">
-            <img src="images/ChatGPT Image Aug 30, 2026, 09_55_39 PM.png" alt="Event 2" class="w-full h-48 object-cover rounded-2xl">
-            <img src="images/ChatGPT Image Aug 30, 2026, 09_56_41 PM.png" alt="Event 3" class="w-full h-48 object-cover rounded-2xl">
-            <img src="images/ChatGPT Image Aug 30, 2026, 09_57_39 PM.png" alt="Event 4" class="w-full h-48 object-cover rounded-2xl">
-            <img src="images/ChatGPT Image Aug 30, 2026, 09_58_39 PM.png" alt="Event 5" class="w-full h-48 object-cover rounded-2xl col-span-2 md:col-span-1">
+            <img src="images/WhatsApp Image 2026-09-01 at 10.41.01 AM.jpeg" alt="Event 1" class="w-full h-48 object-cover rounded-2xl">
+            <img src="images/WhatsApp Image 2026-09-01 at 10.41.58 AM.jpeg" alt="Event 2" class="w-full h-48 object-cover rounded-2xl">
+            <img src="images/WhatsApp Image 2026-09-01 at 10.42.07 AM.jpeg" alt="Event 3" class="w-full h-48 object-cover rounded-2xl">
+            <img src="images/WhatsApp Image 2026-09-01 at 10.42.12 AM (1).jpeg" alt="Event 4" class="w-full h-48 object-cover rounded-2xl">
+            <img src="images/WhatsApp Image 2026-09-01 at 10.42.14 AM (1).jpeg" alt="Event 5" class="w-full h-48 object-cover rounded-2xl col-span-2 md:col-span-1">
         </div>
     </section>
 
