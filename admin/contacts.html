@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -199,10 +199,10 @@
           <td class="px-4 py-2.5 text-xs text-gray-400">${c.created_at ? new Date(c.created_at).toLocaleDateString() : 'N/A'}</td>
           <td class="px-4 py-2.5">
             <div class="flex items-center gap-2">
-              <button onclick="viewContact(${c.id})" class="px-3 py-1 bg-brand text-white text-xs rounded-lg hover:opacity-90">View</button>
-              ${c.status === 'unread' ? `<button onclick="markAs(${c.id}, 'read')" class="px-3 py-1 bg-blue-500 text-white text-xs rounded-lg hover:bg-blue-600">Mark Read</button>` : ''}
-              ${c.status !== 'replied' ? `<button onclick="markAs(${c.id}, 'replied')" class="px-3 py-1 bg-green-500 text-white text-xs rounded-lg hover:bg-green-600">Mark Replied</button>` : ''}
-              <button onclick="deleteContact(${c.id})" class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-lg hover:bg-gray-200">Delete</button>
+              <button onclick="viewContact('${c.id}')" class="px-3 py-1 bg-brand text-white text-xs rounded-lg hover:opacity-90">View</button>
+              ${c.status === 'unread' ? `<button onclick="markAs('${c.id}', 'read')" class="px-3 py-1 bg-blue-500 text-white text-xs rounded-lg hover:bg-blue-600">Mark Read</button>` : ''}
+              ${c.status !== 'replied' ? `<button onclick="markAs('${c.id}', 'replied')" class="px-3 py-1 bg-green-500 text-white text-xs rounded-lg hover:bg-green-600">Mark Replied</button>` : ''}
+              <button onclick="deleteContact('${c.id}')" class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-lg hover:bg-gray-200">Delete</button>
             </div>
           </td>
         </tr>
@@ -249,8 +249,8 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               Reply via Email
             </a>
-            ${contact.status !== 'replied' ? `<button onclick="markAs(${contact.id}, 'replied'); closeModal()" class="px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600">Mark as Replied</button>` : ''}
-            <button onclick="deleteContact(${contact.id}); closeModal()" class="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 ml-auto">Delete</button>
+            ${contact.status !== 'replied' ? `<button onclick="markAs('${contact.id}', 'replied'); closeModal()" class="px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600">Mark as Replied</button>` : ''}
+            <button onclick="deleteContact('${contact.id}'); closeModal()" class="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 ml-auto">Delete</button>
           </div>
         </div>
       `;

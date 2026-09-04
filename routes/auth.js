@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { getOne, runQuery } = require('../database/setup');
+const { getDb, toId, ObjectId } = require('../database/setup');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
@@ -14,7 +14,8 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    const admin = getOne('SELECT * FROM admins WHERE email = ?', [email]);
+    const db = await getDb();
+    const admin = await db.collection('admins').findOne({ email: String(email).toLowerCase() });
     if (!admin) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
@@ -24,13 +25,14 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ id: admin.id, email: admin.email, name: admin.name }, JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign({ id: admin._id.toString(), email: admin.email, name: admin.name }, JWT_SECRET, { expiresIn: '24h' });
 
     res.json({
       token,
-      admin: { id: admin.id, email: admin.email, name: admin.name }
+      admin: { id: admin._id.toString(), email: admin.email, name: admin.name }
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -51,7 +53,8 @@ router.put('/password', auth, async (req, res) => {
       return res.status(400).json({ error: 'New password must be at least 6 characters long' });
     }
 
-    const admin = getOne('SELECT * FROM admins WHERE id = ?', [req.admin.id]);
+    const db = await getDb();
+    const admin = await db.collection('admins').findOne({ _id: toId(req.admin.id) });
     if (!admin) {
       return res.status(404).json({ error: 'Admin not found' });
     }
@@ -62,10 +65,11 @@ router.put('/password', auth, async (req, res) => {
     }
 
     const hash = await bcrypt.hash(String(newPassword), 10);
-    runQuery('UPDATE admins SET password_hash = ? WHERE id = ?', [hash, req.admin.id]);
+    await db.collection('admins').updateOne({ _id: admin._id }, { $set: { password_hash: hash } });
 
     res.json({ message: 'Password changed successfully' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -82,7 +86,8 @@ router.put('/email', auth, async (req, res) => {
       return res.status(400).json({ error: 'Please enter a valid email address' });
     }
 
-    const admin = getOne('SELECT * FROM admins WHERE id = ?', [req.admin.id]);
+    const db = await getDb();
+    const admin = await db.collection('admins').findOne({ _id: toId(req.admin.id) });
     if (!admin) {
       return res.status(404).json({ error: 'Admin not found' });
     }
@@ -92,17 +97,18 @@ router.put('/email', auth, async (req, res) => {
       return res.status(401).json({ error: 'Current password is incorrect' });
     }
 
-    const existing = getOne('SELECT id FROM admins WHERE email = ?', [String(newEmail).toLowerCase()]);
-    if (existing && existing.id !== admin.id) {
+    const existing = await db.collection('admins').findOne({ email: String(newEmail).toLowerCase() });
+    if (existing && existing._id.toString() !== admin._id.toString()) {
       return res.status(409).json({ error: 'This email is already in use' });
     }
 
-    runQuery('UPDATE admins SET email = ? WHERE id = ?', [String(newEmail).toLowerCase(), req.admin.id]);
+    await db.collection('admins').updateOne({ _id: admin._id }, { $set: { email: String(newEmail).toLowerCase() } });
 
-    const newToken = jwt.sign({ id: admin.id, email: String(newEmail).toLowerCase(), name: admin.name }, JWT_SECRET, { expiresIn: '24h' });
+    const newToken = jwt.sign({ id: admin._id.toString(), email: String(newEmail).toLowerCase(), name: admin.name }, JWT_SECRET, { expiresIn: '24h' });
 
-    res.json({ message: 'Email changed successfully', token: newToken, admin: { id: admin.id, email: String(newEmail).toLowerCase(), name: admin.name } });
+    res.json({ message: 'Email changed successfully', token: newToken, admin: { id: admin._id.toString(), email: String(newEmail).toLowerCase(), name: admin.name } });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 });

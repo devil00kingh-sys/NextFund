@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -273,7 +273,7 @@
           <td class="px-4 py-2.5">
             <div class="flex items-center gap-2">
               <button onclick='editBlog(${JSON.stringify(b).replace(/'/g, "&#39;")})' class="px-3 py-1 bg-blue-50 text-blue-600 text-xs rounded-lg hover:bg-blue-100 font-medium">Edit</button>
-              <button onclick="deleteBlog(${b.id})" class="px-3 py-1 bg-red-50 text-red-600 text-xs rounded-lg hover:bg-red-100 font-medium">Delete</button>
+              <button onclick="deleteBlog('${b.id}')" class="px-3 py-1 bg-red-50 text-red-600 text-xs rounded-lg hover:bg-red-100 font-medium">Delete</button>
             </div>
           </td>
         </tr>

@@ -1,59 +1,112 @@
 const express = require('express');
-const { getAll, getOne, runQuery } = require('../database/setup');
+const { getDb, toId, serialize, serializeMany } = require('../database/setup');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
-router.get('/', auth, (req, res) => {
-  const { status } = req.query;
-  let sql = 'SELECT * FROM applications';
-  const params = [];
-  if (status && status !== 'all') {
-    sql += ' WHERE status = ?';
-    params.push(status);
+router.get('/', auth, async (req, res) => {
+  try {
+    const { status } = req.query;
+    const db = await getDb();
+    const filter = {};
+    if (status && status !== 'all') filter.status = status;
+    const apps = await db.collection('applications').find(filter).sort({ submitted_at: -1 }).toArray();
+    res.json(serializeMany(apps));
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
   }
-  sql += ' ORDER BY submitted_at DESC';
-  const apps = getAll(sql, params);
-  res.json(apps);
 });
 
-router.get('/stats', auth, (req, res) => {
-  const total = getAll('SELECT COUNT(*) as count FROM applications')[0]?.count || 0;
-  const pending = getAll("SELECT COUNT(*) as count FROM applications WHERE status = 'pending'")[0]?.count || 0;
-  const approved = getAll("SELECT COUNT(*) as count FROM applications WHERE status = 'approved'")[0]?.count || 0;
-  const rejected = getAll("SELECT COUNT(*) as count FROM applications WHERE status = 'rejected'")[0]?.count || 0;
-  res.json({ total, pending, approved, rejected });
-});
-
-router.get('/:id', auth, (req, res) => {
-  const app = getOne('SELECT * FROM applications WHERE id = ?', [req.params.id]);
-  if (!app) return res.status(404).json({ error: 'Application not found' });
-  res.json(app);
-});
-
-router.put('/:id', auth, (req, res) => {
-  const { status } = req.body;
-  if (!status || !['pending', 'approved', 'rejected'].includes(status)) {
-    return res.status(400).json({ error: 'Invalid status' });
+router.get('/stats', auth, async (req, res) => {
+  try {
+    const db = await getDb();
+    const col = db.collection('applications');
+    const [total, pending, approved, rejected] = await Promise.all([
+      col.countDocuments({}),
+      col.countDocuments({ status: 'pending' }),
+      col.countDocuments({ status: 'approved' }),
+      col.countDocuments({ status: 'rejected' }),
+    ]);
+    res.json({ total, pending, approved, rejected });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
   }
-  runQuery('UPDATE applications SET status = ? WHERE id = ?', [status, req.params.id]);
-  const app = getOne('SELECT * FROM applications WHERE id = ?', [req.params.id]);
-  res.json(app);
 });
 
-router.delete('/:id', auth, (req, res) => {
-  runQuery('DELETE FROM applications WHERE id = ?', [req.params.id]);
-  res.json({ message: 'Application deleted' });
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const db = await getDb();
+    const app = await db.collection('applications').findOne({ _id: toId(req.params.id) });
+    if (!app) return res.status(404).json({ error: 'Application not found' });
+    res.json(serialize(app));
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-router.post('/submit', (req, res) => {
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const { status } = req.body;
+    if (!status || !['pending', 'approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ error: 'Invalid status' });
+    }
+    const db = await getDb();
+    await db.collection('applications').updateOne({ _id: toId(req.params.id) }, { $set: { status } });
+    const app = await db.collection('applications').findOne({ _id: toId(req.params.id) });
+    res.json(serialize(app));
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const db = await getDb();
+    await db.collection('applications').deleteOne({ _id: toId(req.params.id) });
+    res.json({ message: 'Application deleted' });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/submit', async (req, res) => {
   try {
     const d = req.body;
-    const v = k => (d[k] === undefined ? null : d[k]);
-    runQuery(`INSERT INTO applications (founder_name, founder_email, founder_linkedin, founder_role, company_name, company_description, company_url, company_location, stage, monthly_expenses, monthly_revenue, active_users, product_description, motivation, novelty, competitors, unique_insight, business_model, incorporated, incorporation_location, equity_split, past_funding, requested_amount, batch_preference, additional_info, video_file, demo_file) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-      [v('founder_name'), v('founder_email'), v('founder_linkedin'), v('founder_role'), v('company_name'), v('company_description'), v('company_url'), v('company_location'), v('stage'), v('monthly_expenses'), v('monthly_revenue'), v('active_users'), v('product_description'), v('motivation'), v('novelty'), v('competitors'), v('unique_insight'), v('business_model'), v('incorporated'), v('incorporation_location'), v('equity_split'), v('past_funding'), v('requested_amount'), v('batch_preference'), v('additional_info'), v('video_file'), v('demo_file')]
-    );
+    const v = k => (d[k] === undefined || d[k] === '') ? null : d[k];
+    const db = await getDb();
+    await db.collection('applications').insertOne({
+      founder_name: v('founder_name'),
+      founder_email: v('founder_email'),
+      founder_linkedin: v('founder_linkedin'),
+      founder_role: v('founder_role'),
+      company_name: v('company_name'),
+      company_description: v('company_description'),
+      company_url: v('company_url'),
+      company_location: v('company_location'),
+      stage: v('stage'),
+      monthly_expenses: v('monthly_expenses'),
+      monthly_revenue: v('monthly_revenue'),
+      active_users: v('active_users'),
+      product_description: v('product_description'),
+      motivation: v('motivation'),
+      novelty: v('novelty'),
+      competitors: v('competitors'),
+      unique_insight: v('unique_insight'),
+      business_model: v('business_model'),
+      incorporated: v('incorporated'),
+      incorporation_location: v('incorporation_location'),
+      equity_split: v('equity_split'),
+      past_funding: v('past_funding'),
+      requested_amount: v('requested_amount'),
+      batch_preference: v('batch_preference'),
+      additional_info: v('additional_info'),
+      video_file: v('video_file'),
+      demo_file: v('demo_file'),
+      status: 'pending',
+      submitted_at: new Date()
+    });
     res.json({ message: 'Application submitted successfully' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to submit application' });
   }
 });
