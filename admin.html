@@ -46,8 +46,8 @@
   <div id="loginView" class="hidden min-h-screen flex items-center justify-center p-6" style="background: radial-gradient(1000px 500px at 10% 0%, rgba(242,78,43,0.08), transparent), radial-gradient(800px 500px at 100% 100%, rgba(11,14,20,0.06), transparent), #f8f9fa;">
     <div class="card w-full max-w-sm p-10">
       <div class="text-center mb-8">
-        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#F24E2B] flex items-center justify-center text-white font-extrabold text-2xl">N</div>
-        <h1 class="text-2xl font-extrabold tracking-tight">NXTFund Admin</h1>
+        <div class="text-3xl font-extrabold tracking-tight mb-3">Admin</div>
+        <img src="assets/images/logo/log1.png" alt="NXTFund" class="w-40 h-32 mx-auto mb-4 object-contain">
         <p class="text-sm text-gray-500 mt-1">Sign in with your admin password</p>
       </div>
       <form id="loginForm" autocomplete="off">
@@ -60,7 +60,7 @@
           Login
         </button>
       </form>
-      <p class="text-center text-[11px] text-gray-400 mt-6">Set the password in your server's <code class="bg-gray-100 px-1 rounded">.env</code> file.</p>
+      
     </div>
   </div>
 
@@ -69,19 +69,15 @@
     <header class="bg-[#0B0E14] text-white">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-[#F24E2B] flex items-center justify-center font-extrabold text-white">N</div>
-          <div>
-            <div class="font-bold text-lg leading-tight">NXTFund Admin</div>
-            <div class="text-[11px] text-gray-400">CMS, messages &amp; applications</div>
-          </div>
+          <img src="assets/images/logo/footer-logo.png" alt="NXTFund" class="w-32 h-24 object-contain">
         </div>
         <div class="flex items-center gap-4">
           <span class="text-xs text-gray-300 hidden sm:block">Admin</span>
           <button id="logoutBtn" class="text-xs font-semibold px-4 py-2 rounded-lg border border-gray-700 hover:border-[#F24E2B] hover:text-[#F24E2B] transition">Logout</button>
         </div>
       </div>
-      <nav class="max-w-7xl mx-auto px-6 pb-0">
-        <div class="flex overflow-x-auto no-scrollbar gap-2 pb-3">
+      <nav class="max-w-7xl mx-auto px-6 border-t border-white/10">
+        <div class="flex overflow-x-auto no-scrollbar gap-2 py-3">
           <button class="tab-btn px-4 py-2 rounded-lg text-sm font-bold bg-white/5 text-gray-300 hover:text-white transition" data-tab="overview">Overview</button>
           <button class="tab-btn px-4 py-2 rounded-lg text-sm font-bold bg-white/5 text-gray-300 hover:text-white transition" data-tab="messages">Messages</button>
           <button class="tab-btn px-4 py-2 rounded-lg text-sm font-bold bg-white/5 text-gray-300 hover:text-white transition" data-tab="applications">Applications</button>
