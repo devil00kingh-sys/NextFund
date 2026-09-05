@@ -7,7 +7,6 @@ async function start() {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`NXTFund Server running on http://localhost:${PORT}`);
-    console.log(`Admin Panel: http://localhost:${PORT}/admin/`);
     console.log(`Main Site:   http://localhost:${PORT}/`);
   });
 }

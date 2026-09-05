@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -94,6 +94,20 @@
             transform: scale(1.15) rotate(-3deg);
             filter: grayscale(0) drop-shadow(0 0 8px rgba(242,78,43,0.5));
             opacity: 1;
+        }
+
+        /* Event images marquee (moves right) */
+        .event-marquee {
+            display: flex;
+            width: max-content;
+            animation: marqueeScrollRight 30s linear infinite;
+        }
+        .event-marquee:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marqueeScrollRight {
+            0%   { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
         }
 
         .animate-float { animation: float 5s ease-in-out infinite; }
@@ -327,7 +341,7 @@
                          <a href="yc/yc-application.html" class="bg-brand text-white text-[14px] font-semibold py-3 px-5 rounded-md hover:bg-orange-600 transition flex items-center gap-2">
                              Apply For Funding <span>&rarr;</span>
                          </a>
-                         <a href="index.html" class="bg-white border-[1.5px] border-gray-200 text-black text-[14px] font-semibold py-3 px-5 rounded-md hover:bg-gray-50 transition">
+<a href="school.html" class="bg-white border-[1.5px] border-gray-200 text-black text-[14px] font-semibold py-3 px-5 rounded-md hover:bg-gray-50 transition">
                              Explore Startup Valley
                          </a>
                      </div>
@@ -441,7 +455,7 @@
                     <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
                     <span class="text-[10px] font-bold text-brand uppercase tracking-widest">Upcoming</span>
                 </div>
-                <h2 class="text-2xl font-bold mb-2">NXTFund Founder Meetup � Bengaluru</h2>
+                <h2 class="text-2xl font-bold mb-2">NXTFund Founder Meetup — Bengaluru</h2>
                 <p class="text-gray-400 text-sm leading-relaxed max-w-md">
                     An exclusive evening for founders to connect, collaborate and grow together.
                 </p>
@@ -721,14 +735,30 @@
         </a>
     </section>
 
-    <section class="max-w-7xl mx-auto px-6 py-8">
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <!-- Replace these 5 image sources -->
-            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.41.01 AM.jpeg" alt="Event 1" class="w-full h-48 object-cover rounded-2xl">
-            <img src="assets/images/pages/investor/WhatsApp Image 2026-09-01 at 10.41.58 AM.jpeg" alt="Event 2" class="w-full h-48 object-cover rounded-2xl">
-            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.07 AM.jpeg" alt="Event 3" class="w-full h-48 object-cover rounded-2xl">
-            <img src="assets/images/pages/index/WhatsApp Image 2026-09-01 at 10.42.12 AM (1).jpeg" alt="Event 4" class="w-full h-48 object-cover rounded-2xl">
-            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.14 AM (1).jpeg" alt="Event 5" class="w-full h-48 object-cover rounded-2xl col-span-2 md:col-span-1">
+    <section class="max-w-full overflow-hidden py-8 px-0">
+<div class="event-marquee">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.41.01 AM.jpeg" alt="Event 1" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.41.35 AM.jpeg" alt="Event 2" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.07 AM.jpeg" alt="Event 3" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.10 AM.jpeg" alt="Event 4" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.11 AM (1).jpeg" alt="Event 5" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.11 AM (3).jpeg" alt="Event 6" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.12 AM (2).jpeg" alt="Event 7" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.13 AM (1).jpeg" alt="Event 8" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.13 AM.jpeg" alt="Event 9" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.14 AM (1).jpeg" alt="Event 10" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.15 AM (1).jpeg" alt="Event 11" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.41.01 AM.jpeg" alt="Event 1" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.41.35 AM.jpeg" alt="Event 2" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.07 AM.jpeg" alt="Event 3" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.10 AM.jpeg" alt="Event 4" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.11 AM (1).jpeg" alt="Event 5" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.11 AM (3).jpeg" alt="Event 6" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.12 AM (2).jpeg" alt="Event 7" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.13 AM (1).jpeg" alt="Event 8" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.13 AM.jpeg" alt="Event 9" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.14 AM (1).jpeg" alt="Event 10" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
+            <img src="assets/images/pages/events/WhatsApp Image 2026-09-01 at 10.42.15 AM (1).jpeg" alt="Event 11" class="w-72 h-48 object-cover rounded-2xl shrink-0 mx-3">
         </div>
     </section>
 
@@ -769,12 +799,33 @@
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap justify-between items-center gap-6 opacity-65 grayscale">
-        <h3 class="font-serif font-bold text-xl tracking-tighter">entreprenuer INDIA</h3>
-        <h3 class="font-black text-xl tracking-widest text-blue-900">ZOOM</h3>
-        <h3 class="font-bold text-sm tracking-wide">StartupNews<span class="text-red-500">.</span>fyi</h3>
-        <h3 class="font-serif font-black text-lg tracking-widest">YOURSTORY</h3>
-        <h3 class="font-serif font-bold text-xl tracking-tight">Forbes</h3>
+<section class="max-w-full overflow-hidden py-10 px-0 opacity-65 grayscale">
+<div class="event-marquee">
+            <div class="flex items-center gap-12 pr-12 shrink-0">
+                <h3 class="font-serif font-bold text-xl tracking-tighter whitespace-nowrap">entreprenuer INDIA</h3>
+                <h3 class="font-black text-xl tracking-widest text-blue-900 whitespace-nowrap">ZOOM</h3>
+                <h3 class="font-bold text-sm tracking-wide whitespace-nowrap">StartupNews<span class="text-red-500">.</span>fyi</h3>
+                <h3 class="font-serif font-black text-lg tracking-widest whitespace-nowrap">YOURSTORY</h3>
+                <h3 class="font-serif font-bold text-xl tracking-tight whitespace-nowrap">Forbes</h3>
+            </div>            <div class="flex items-center gap-12 pr-12 shrink-0">
+                <h3 class="font-serif font-bold text-xl tracking-tighter whitespace-nowrap">entreprenuer INDIA</h3>
+                <h3 class="font-black text-xl tracking-widest text-blue-900 whitespace-nowrap">ZOOM</h3>
+                <h3 class="font-bold text-sm tracking-wide whitespace-nowrap">StartupNews<span class="text-red-500">.</span>fyi</h3>
+                <h3 class="font-serif font-black text-lg tracking-widest whitespace-nowrap">YOURSTORY</h3>
+                <h3 class="font-serif font-bold text-xl tracking-tight whitespace-nowrap">Forbes</h3>
+            </div>            <div class="flex items-center gap-12 pr-12 shrink-0">
+                <h3 class="font-serif font-bold text-xl tracking-tighter whitespace-nowrap">entreprenuer INDIA</h3>
+                <h3 class="font-black text-xl tracking-widest text-blue-900 whitespace-nowrap">ZOOM</h3>
+                <h3 class="font-bold text-sm tracking-wide whitespace-nowrap">StartupNews<span class="text-red-500">.</span>fyi</h3>
+                <h3 class="font-serif font-black text-lg tracking-widest whitespace-nowrap">YOURSTORY</h3>
+                <h3 class="font-serif font-bold text-xl tracking-tight whitespace-nowrap">Forbes</h3>
+            </div>            <div class="flex items-center gap-12 pr-12 shrink-0">
+                <h3 class="font-serif font-bold text-xl tracking-tighter whitespace-nowrap">entreprenuer INDIA</h3>
+                <h3 class="font-black text-xl tracking-widest text-blue-900 whitespace-nowrap">ZOOM</h3>
+                <h3 class="font-bold text-sm tracking-wide whitespace-nowrap">StartupNews<span class="text-red-500">.</span>fyi</h3>
+                <h3 class="font-serif font-black text-lg tracking-widest whitespace-nowrap">YOURSTORY</h3>
+                <h3 class="font-serif font-bold text-xl tracking-tight whitespace-nowrap">Forbes</h3>
+            </div>        </div>
     </section>
 
     <section class="max-w-7xl mx-auto px-6 py-8 relative">
@@ -808,13 +859,13 @@
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
                 <li><a href="terms-privacy.html" class="hover:text-brand transition">Terms & Privacy</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-brand transition">About Us</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-brand transition">Contact Us</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
                 <li><a href="partners.html" class="hover:text-brand transition">Become a Partner</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
@@ -840,7 +891,7 @@
             </div>
 
             <div class="text-[11px] text-gray-500 pt-6 border-t border-gray-900">
-                � 2026 Celebso. All rights reserved.
+                © 2026 Celebso. All rights reserved.
             </div>
 
         </div>

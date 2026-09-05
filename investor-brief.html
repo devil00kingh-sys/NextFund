@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -426,6 +426,107 @@
     .gallery-item:hover img {
       transform: scale(1.1);
     }
+
+    /* Advisors & Partners */
+    .team-section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-subtitle {
+      color: #F24E2B;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      color: #111827;
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .section-description {
+      color: #6b7280;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 50px;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #f0f0f2;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(242, 78, 43, 0.14);
+      border-color: #F24E2B;
+    }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: top;
+    }
+    .card-content {
+      padding: 18px 14px 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffffff;
+    }
+    .card-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 12px;
+    }
+    .card-divider {
+      width: 20px;
+      height: 3px;
+      background-color: #F24E2B;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+    .card-company {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+    }
+    @media (max-width: 1024px) {
+      .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .section-title {
+        font-size: 32px;
+      }
+    }
+    @media (max-width: 480px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .card img {
+        height: 170px;
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
@@ -486,76 +587,122 @@
       <img src="assets/images/pages/investor/ChatGPT Image Aug 29, 2026, 01_16_08 PM.png" alt="Global Ecosystem Map">
     </div>
 
-    <!-- Supporters and Investors -->
-    <section class="supporters-section">
-      <h2 class="supporters-header">Supporters and Investors</h2>
+    <!-- Advisors & Partners -->
+    <section class="team-section">
+      <h4 class="section-subtitle">Our Advisors & Partners</h4>
+      <h2 class="section-title">Meet the People Behind Our Success</h2>
+      <p class="section-description">A strong network of mentors, investors and industry leaders<br>guiding our journey and empowering our vision.</p>
 
-      <div class="supporters-grid">
-        <div class="supporters-pill"></div>
+      <div class="grid-container">
 
-        <div class="supporter-card">
-          <img src="assets/images/pages/investor/ChatGPT Image Sep 4, 2026, 11_37_45 AM.png" alt="Kunal Shah" class="supporter-img">
-          <div class="supporter-info">
-            <h3 class="supporter-name">Kunal Shah</h3>
-            <p class="supporter-role">Cred Founder Advisor</p>
-            <p class="supporter-org">Sequoia Capital</p>
+        <div class="card">
+          <img src="assets/images/pages/investor/investor1.png" alt="Amit Singal">
+          <div class="card-content">
+            <h3 class="card-name">Amit Singal</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Fluid Ventures</p>
           </div>
         </div>
 
-        <div class="supporter-card">
-          <img src="assets/images/pages/investor/ChatGPT Image Sep 4, 2026, 11_39_52 AM.png" alt="Vidit Aatrey" class="supporter-img">
-          <div class="supporter-info">
-            <h3 class="supporter-name">Vidit Aatrey</h3>
-            <p class="supporter-role">Meesho Founder</p>
-            <p class="supporter-org">IIT Delhi</p>
+        <div class="card">
+          <img src="assets/images/pages/investor/investor2.png" alt="Sumit Srivastava">
+          <div class="card-content">
+            <h3 class="card-name">Sumit Srivastava</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Startup Chaupal</p>
           </div>
         </div>
 
-        <div class="supporter-card">
-          <img src="assets/images/pages/investor/ChatGPT Image Sep 4, 2026, 11_41_34 AM.png" alt="Vijay Shekhar" class="supporter-img">
-          <div class="supporter-info">
-            <h3 class="supporter-name">Vijay Shekhar</h3>
-            <p class="supporter-role">Paytm Founder</p>
-            <p class="supporter-org">Delhi College of</p>
+        <div class="card">
+          <img src="assets/images/pages/investor/investor3.png" alt="Mr. Pankaj">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Pankaj</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Organic Funding</p>
           </div>
         </div>
 
-        <div class="supporter-card">
-          <img src="assets/images/pages/investor/ChatGPT Image Sep 4, 2026, 11_42_38 AM.png" alt="Mekin M" class="supporter-img">
-          <div class="supporter-info">
-            <h3 class="supporter-name">Mekin M</h3>
-            <p class="supporter-role">Udhayam Founder</p>
-            <p class="supporter-org">Ex - Flipkart</p>
+        <div class="card">
+          <img src="assets/images/pages/investor/investor4.png" alt="Vivek Chadha">
+          <div class="card-content">
+            <h3 class="card-name">Vivek Chadha</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">AccelerateX</p>
           </div>
         </div>
 
-        <div class="supporter-card">
-          <img src="assets/images/pages/investor/ChatGPT Image Sep 4, 2026, 11_43_30 AM.png" alt="Abhiraj Bhal" class="supporter-img">
-          <div class="supporter-info">
-            <h3 class="supporter-name">Abhiraj Bhal</h3>
-            <p class="supporter-role">Urban Company Founder</p>
-            <p class="supporter-org">IIM Ahmedabad</p>
+        <div class="card">
+          <img src="assets/images/pages/investor/investor5.png" alt="Mr. Radhesh">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Radhesh</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Shark Tank India</p>
           </div>
         </div>
 
-        <div class="supporter-card">
-          <img src="assets/images/pages/investor/ChatGPT Image Sep 4, 2026, 11_44_29 AM.png" alt="Varun Khaitan" class="supporter-img">
-          <div class="supporter-info">
-            <h3 class="supporter-name">Varun Khaitan</h3>
-            <p class="supporter-role">Urban Company Founder</p>
-            <p class="supporter-org">IIT Kanpur</p>
+        <div class="card">
+          <img src="assets/images/pages/investor/investor6.png" alt="Mr. Rakesh">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Rakesh</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">i-Start</p>
           </div>
         </div>
 
-        <div class="supporter-card supporter-extra">
-          <div class="supporter-spacer"></div>
-          <div class="supporter-extra-text">
-            ...and 50+<br>
-            startup<br>
-            mentors<br>
-            & investors
+        <div class="card">
+          <img src="assets/images/pages/investor/investor7.png" alt="Mr. Shalabhh">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Shalabhh</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Marwari Catalysts</p>
           </div>
         </div>
+
+        <div class="card">
+          <img src="assets/images/pages/investor/investor8.png" alt="Mr. Jamil">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Jamil</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">i-Start</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="assets/images/pages/investor/investor9.png" alt="Mr. Veer Singh">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Veer Singh</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">IDFC Bank</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="assets/images/pages/investor/investor10.png" alt="Avni Srivastava">
+          <div class="card-content">
+            <h3 class="card-name">Avni Srivastava</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Hackingly</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="assets/images/pages/investor/investor11.png" alt="Mr. Rajesh">
+          <div class="card-content">
+            <h3 class="card-name">Mr. Rajesh</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Angel Investor</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="assets/images/pages/investor/investor12.png" alt="Ms. Sanju Sachdev">
+          <div class="card-content">
+            <h3 class="card-name">Ms. Sanju Sachdev</h3>
+            <div class="card-divider"></div>
+            <p class="card-company">Organic Funding</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -638,13 +785,13 @@
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
                 <li><a href="terms-privacy.html" class="hover:text-brand transition">Terms & Privacy</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-brand transition">About Us</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-brand transition">Contact Us</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
                 <li><a href="partners.html" class="hover:text-brand transition">Become a Partner</a></li>
-                <li class="text-gray-500">�</li>
+                <li class="text-gray-500">•</li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
@@ -670,7 +817,7 @@
             </div>
 
             <div class="text-[11px] text-gray-500 pt-6 border-t border-gray-900">
-                � 2026 Celebso. All rights reserved.
+                © 2026 Celebso. All rights reserved.
             </div>
 
         </div>
