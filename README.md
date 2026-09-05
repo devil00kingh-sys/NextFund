@@ -183,6 +183,41 @@ All `/api/auth/*` and `/api/admin/*` admin endpoints require `Authorization: Bea
 
 ---
 
+## Deploying to Vercel
+
+This project runs on Vercel as a **serverless function** (`api/index.js`) that wraps the Express app, with the HTML/YC/assets served as static content (`vercel.json`).
+
+### 1. Configure environment variables
+
+Vercel does **not** ship the local `.env` file. In the Vercel dashboard (**Project → Settings → Environment Variables**) add:
+
+| Name          | Value                                                    |
+|---------------|----------------------------------------------------------|
+| `MONGODB_URI` | Your MongoDB connection string (Atlas or local)          |
+| `MONGODB_DB`  | `nxtfund`                                                  |
+| `ADMIN_PASSWORD` | Admin panel password (optional — fallback is the DB-stored password) |
+| `JWT_SECRET`  | A random secret for signing admin session tokens (optional) |
+
+If `ADMIN_PASSWORD` is left unset, the admin password comes from the `settings` collection (set via the admin panel's **Change Password**), otherwise it falls back to `admin123`.
+
+### 2. Deploy
+
+```bash
+npm install -g vercel
+vercel --prod
+```
+
+Or push to your Git repo and import it into Vercel — every push to `main` auto-deploys.
+
+### 3. Serverless notes
+
+- **Sessions** are stateless (HMAC-signed tokens), so login works across cold starts.
+- **Password changes** are stored (hashed with scrypt) in the MongoDB `settings` collection, so they persist on serverless. For local/self-hosted runs they are also written to `.env`.
+- **File uploads** go to `/tmp` on serverless — files are **not persisted** between requests. For persistent uploads, the `assets/uploads/` path only works on self-hosted deployments.
+- Main site: `https://<your-domain>/` · Admin: `https://<your-domain>/admin`.
+
+---
+
 ## Chat / Form Details
 
 - **Funding Application** (`yc/`): step-by-step wizard covering founders, company, idea, video, equity, batch preference and a final submit that posts to `/api/applications/submit`. Submitted applications get `status: "pending"` and a `submitted_at` timestamp.

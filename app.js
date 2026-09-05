@@ -13,30 +13,24 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
-const diskStorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, 'assets', 'uploads')),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '-'))
-});
-const upload = multer({ storage: diskStorage, limits: { fileSize: 100 * 1024 * 1024 } });
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 100 * 1024 * 1024 } });
 
-app.post('/api/upload', (req, res) => {
-  upload.single('file')(req, res, async (err) => {
-    if (err) return res.status(400).json({ error: err.message });
-    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
-    const originalName = req.file.originalname.replace(/\s+/g, '-');
-    const filename = Date.now() + '-' + originalName;
+  const filename = Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-');
 
-    try {
-      const uploadsDir = path.join(__dirname, 'assets', 'uploads');
-      if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
-      const filePath = path.join(uploadsDir, filename);
-      fs.writeFileSync(filePath, req.file.buffer);
-      return res.json({ filename, path: `/assets/uploads/${filename}` });
-    } catch (writeErr) {
-      return res.status(500).json({ error: 'Upload failed' });
-    }
-  });
+  try {
+    const uploadsDir = process.env.NODE_ENV === 'production'
+      ? path.join(require('os').tmpdir())
+      : path.join(__dirname, 'assets', 'uploads');
+    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+    const filePath = path.join(uploadsDir, filename);
+    fs.writeFileSync(filePath, req.file.buffer);
+    return res.json({ filename, path: `/assets/uploads/${filename}` });
+  } catch (writeErr) {
+    return res.status(500).json({ error: 'Upload failed' });
+  }
 });
 
 const applicationRoutes = require('./routes/applications');
@@ -59,7 +53,7 @@ app.use('/api/auth', authRoutes);
 app.get('/api/settings', async (req, res) => {
   try {
     const db = await getDb();
-    const docs = await db.collection('settings').find({}).toArray();
+    const docs = await db.collection('settings').find({ setting_key: { $ne: 'admin_password' } }).toArray();
     const stored = {};
     docs.forEach((d) => { stored[d.setting_key] = d.value; });
     res.json(stored);

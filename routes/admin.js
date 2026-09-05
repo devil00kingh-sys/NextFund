@@ -71,16 +71,21 @@ function buildSearchFilter(query, schema, extra) {
 
 const PASSWORD_REGEX = /^[A-Za-z0-9@#$%^&*_\-+=.!]{8,64}$/;
 
-router.post('/password', (req, res) => {
+router.post('/password', async (req, res) => {
   const { current_password, new_password } = req.body || {};
-  if (!checkAdminPassword(current_password)) {
+  const ok = await checkAdminPassword(current_password).catch(() => false);
+  if (!ok) {
     return res.status(400).json({ error: 'Current password is incorrect' });
   }
   if (!new_password || !PASSWORD_REGEX.test(new_password)) {
     return res.status(400).json({ error: 'New password must be 8-64 characters (letters, numbers, and symbols only)' });
   }
-  changeAdminPassword(new_password);
-  res.json({ message: 'Password updated successfully' });
+  try {
+    await changeAdminPassword(new_password);
+    res.json({ message: 'Password updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Could not save the password. Please try again.' });
+  }
 });
 
 // ======================= Stats =======================
@@ -316,7 +321,7 @@ router.delete('/applications/:id', async (req, res) => {
 router.get('/settings', async (req, res) => {
   try {
     const db = await getDb();
-    const docs = await db.collection('settings').find({}).toArray();
+    const docs = await db.collection('settings').find({ setting_key: { $ne: 'admin_password' } }).toArray();
     const stored = {};
     docs.forEach((d) => { stored[d.setting_key] = d.value; });
     const merged = Object.assign({}, DEFAULT_SETTINGS, stored);
