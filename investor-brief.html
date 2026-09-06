@@ -457,11 +457,13 @@
     .grid-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 26px;
+      gap: 24px;
+      max-width: 1080px;
+      margin: 0 auto;
     }
     .card {
       background: #ffffff;
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid #f0f0f2;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
@@ -474,36 +476,54 @@
       box-shadow: 0 14px 30px rgba(242, 78, 43, 0.14);
       border-color: #F24E2B;
     }
+    .card-img-wrap {
+      padding: 12px 12px 0;
+    }
     .card img {
       width: 100%;
-      height: 220px;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
-      object-position: top;
+      object-position: center top;
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #f3f0f0;
+      display: block;
+    }
+    .card-img-error .card-name-hidden {
+      display: block;
+    }
+    .card-img-error .card img {
+      display: none;
+    }
+    .card-img-error .card-img-fallback {
+      display: flex;
     }
     .card-content {
-      padding: 18px 14px 26px;
+      padding: 14px 12px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       background-color: #ffffff;
     }
     .card-name {
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 700;
       color: #111827;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      text-align: center;
     }
     .card-divider {
-      width: 20px;
+      width: 18px;
       height: 3px;
       background-color: #F24E2B;
       border-radius: 2px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .card-company {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: #6b7280;
+      text-align: center;
     }
     @media (max-width: 1024px) {
       .grid-container {
@@ -518,25 +538,124 @@
         font-size: 32px;
       }
     }
-    @media (max-width: 480px) {
+
+    /* ==== Responsive / Mobile ==== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 24px 16px;
+      }
+      .main-title {
+        font-size: 34px;
+      }
+      .eyebrow-container {
+        gap: 10px;
+      }
+      .line {
+        width: 32px;
+      }
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+      .team-section {
+        padding: 48px 8px;
+      }
+      .section-title {
+        font-size: 30px;
+      }
+      .section-description {
+        font-size: 14px;
+      }
+      .cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 24px;
+      }
+      .cta-content h2 {
+        font-size: 22px;
+      }
+      .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .cta-buttons .btn-primary,
+      .cta-buttons .btn-secondary {
+        width: 100%;
+      }
+      .image-gallery {
+        padding: 16px;
+      }
+      .gallery-heading {
+        font-size: 22px;
+      }
+      .gallery-grid.expanded {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+    @media (max-width: 640px) {
       .grid-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 14px;
+      }
+      .card {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
       }
       .card img {
-        height: 170px;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center top;
+        background: #ffffff;
       }
+      .card-img-fallback {
+        aspect-ratio: 1 / 1;
+        font-size: 28px;
+      }
+      .card-content {
+        align-items: center;
+        padding: 12px 10px 16px;
+      }
+      .card-name {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      .card-divider {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .card-company {
+        font-size: 12px;
+      }
+    }
+
+    /* Graceful fallback when an advisor image fails to load */
+    .card-img-fallback {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fff3f0, #ffe0d6);
+      border-radius: 12px;
+      font-size: 30px;
+      font-weight: 800;
+      color: #F24E2B;
     }
   </style>
 </head>
 <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
 
-    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
+    <nav class="relative flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
         <a href="index.html" class="cursor-pointer">
             <img src="assets/images/logo/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain">
         </a>
 
-        <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
+        <ul id="desktop-menu" class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
             <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="startups.html">Startups</a></li>
             <li class="border-b-2 border-[#F24E2B] text-black pb-1"><a href="investor-brief.html">Investors</a></li>
             <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="partners.html">Partners</a></li>
@@ -545,11 +664,30 @@
             <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="contact-us.html">Contact</a></li>
         </ul>
 
-        <div class="flex items-center space-x-3">
+        <div id="desktop-cta" class="hidden lg:flex items-center space-x-3">
             <a href="yc/yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
                 Apply for Funding
             </a>
             </div>
+
+        <button id="mobile-toggle" aria-label="Toggle menu" class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand">
+            <svg id="icon-menu" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg z-50">
+            <ul class="flex flex-col p-4 space-y-2 text-[15px] font-semibold text-gray-800">
+                <li class="hover:text-brand transition"><a href="startups.html" class="block py-2">Startups</a></li>
+                <li class="hover:text-brand transition"><a href="investor-brief.html" class="block py-2">Investors</a></li>
+                <li class="hover:text-brand transition"><a href="partners.html" class="block py-2">Partners</a></li>
+                <li class="hover:text-brand transition"><a href="events.html" class="block py-2">Events</a></li>
+                <li class="hover:text-brand transition"><a href="blog-insights.html" class="block py-2">News</a></li>
+                <li class="hover:text-brand transition"><a href="contact-us.html" class="block py-2">Contact</a></li>
+                <li class="pt-2">
+                    <a href="yc/yc-application.html" class="block text-center bg-brand text-white font-semibold py-3 rounded-md hover:bg-orange-600 transition">Apply for Funding</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
   <div class="container">
@@ -596,108 +734,132 @@
       <div class="grid-container">
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor1.png" alt="Amit Singal">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor1.jpg" alt="Amit Singal">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Amit Singal</h3>
+            <h3 class="card-name card-name-hidden">Amit Singal</h3>
             <div class="card-divider"></div>
             <p class="card-company">Fluid Ventures</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor2.png" alt="Sumit Srivastava">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor2.jpg" alt="Sumit Srivastava">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Sumit Srivastava</h3>
+            <h3 class="card-name card-name-hidden">Sumit Srivastava</h3>
             <div class="card-divider"></div>
             <p class="card-company">Startup Chaupal</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor3.png" alt="Mr. Pankaj">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor3.jpg" alt="Mr. Pankaj">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Pankaj</h3>
+            <h3 class="card-name card-name-hidden">Mr. Pankaj</h3>
             <div class="card-divider"></div>
             <p class="card-company">Organic Funding</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor4.png" alt="Vivek Chadha">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor4.jpg" alt="Vivek Chadha">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Vivek Chadha</h3>
+            <h3 class="card-name card-name-hidden">Vivek Chadha</h3>
             <div class="card-divider"></div>
             <p class="card-company">AccelerateX</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor5.png" alt="Mr. Radhesh">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor5.jpg" alt="Mr. Radhesh">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Radhesh</h3>
+            <h3 class="card-name card-name-hidden">Mr. Radhesh</h3>
             <div class="card-divider"></div>
             <p class="card-company">Shark Tank India</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor6.png" alt="Mr. Rakesh">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor6.jpg" alt="Mr. Rakesh">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Rakesh</h3>
+            <h3 class="card-name card-name-hidden">Mr. Rakesh</h3>
             <div class="card-divider"></div>
             <p class="card-company">i-Start</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor7.png" alt="Mr. Shalabhh">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor7.jpg" alt="Mr. Shalabhh">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Shalabhh</h3>
+            <h3 class="card-name card-name-hidden">Mr. Shalabhh</h3>
             <div class="card-divider"></div>
             <p class="card-company">Marwari Catalysts</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor8.png" alt="Mr. Jamil">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor8.jpg" alt="Mr. Jamil">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Jamil</h3>
+            <h3 class="card-name card-name-hidden">Mr. Jamil</h3>
             <div class="card-divider"></div>
             <p class="card-company">i-Start</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor9.png" alt="Mr. Veer Singh">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor9.jpg" alt="Mr. Veer Singh">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Veer Singh</h3>
+            <h3 class="card-name card-name-hidden">Mr. Veer Singh</h3>
             <div class="card-divider"></div>
             <p class="card-company">IDFC Bank</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor10.png" alt="Avni Srivastava">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor10.jpg" alt="Avni Srivastava">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Avni Srivastava</h3>
+            <h3 class="card-name card-name-hidden">Avni Srivastava</h3>
             <div class="card-divider"></div>
             <p class="card-company">Hackingly</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor11.png" alt="Mr. Rajesh">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor11.jpg" alt="Mr. Rajesh">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Mr. Rajesh</h3>
+            <h3 class="card-name card-name-hidden">Mr. Rajesh</h3>
             <div class="card-divider"></div>
             <p class="card-company">Angel Investor</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/images/pages/investor/investor12.png" alt="Ms. Sanju Sachdev">
+          <div class="card-img-wrap">
+            <img src="assets/images/pages/investor/optimized/investor12.jpg" alt="Ms. Sanju Sachdev">
+          </div>
           <div class="card-content">
-            <h3 class="card-name">Ms. Sanju Sachdev</h3>
+            <h3 class="card-name card-name-hidden">Ms. Sanju Sachdev</h3>
             <div class="card-divider"></div>
             <p class="card-company">Organic Funding</p>
           </div>
@@ -834,5 +996,47 @@
       }
     </script>
 
+    <script>
+      (function () {
+        function initialsOf(name) {
+          var words = (name || '').trim().split(/\s+/);
+          if (words.length >= 3) {
+            return (words[0][0] + words[1][0] + (words[2][0] || '')).toUpperCase();
+          }
+          return ((words[0] ? words[0][0] : '') + (words[1] ? words[1][0] : '')).toUpperCase();
+        }
+        function fallbackFor(img) {
+          var card = img.closest('.card');
+          if (!card) return;
+          card.classList.add('card-img-error');
+          if (card.querySelector('.card-img-fallback')) return;
+          var holder = document.createElement('div');
+          holder.className = 'card-img-fallback';
+          holder.textContent = initialsOf(img.getAttribute('alt'));
+          img.parentNode.insertBefore(holder, img.nextSibling);
+        }
+        document.querySelectorAll('.card img').forEach(function (img) {
+          img.addEventListener('error', function () { fallbackFor(img); });
+        });
+        document.querySelectorAll('.card img').forEach(function (img) {
+          if (img.complete && img.naturalWidth === 0) fallbackFor(img);
+        });
+      })();
+    </script>
+
+<script>
+        (function () {
+            const toggle = document.getElementById('mobile-toggle');
+            const menu = document.getElementById('mobile-menu');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
+            if (!toggle || !menu) return;
+            toggle.addEventListener('click', () => {
+                const open = menu.classList.toggle('hidden') === false;
+                if (iconMenu) iconMenu.classList.toggle('hidden', open);
+                if (iconClose) iconClose.classList.toggle('hidden', !open);
+            });
+        })();
+    </script>
 </body>
 </html>

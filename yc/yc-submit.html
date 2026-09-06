@@ -759,6 +759,53 @@
     .find-card-error {
       display: none;
     }
+  
+    /* ==== Responsive / Mobile ==== */
+    @media (max-width: 768px) {
+      .app-layout { display: block; }
+      .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        padding: 16px 12px 12px;
+        border-right: none;
+        border-bottom: 1px solid #ededed;
+        overflow: visible;
+      }
+      .sidebar-header {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 8px;
+      }
+      .sidebar-title { font-size: 14px; }
+      .sidebar-subtitle { font-size: 12px; }
+      .help-card { display: none; }
+      .nav-list {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+      }
+      .nav-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 7px 12px;
+        font-size: 12px;
+      }
+      .icon-alert { display: none; }
+      .main-wrapper {
+        padding: 20px 16px 48px;
+        max-width: 100%;
+      }
+      .banner-alert { padding: 10px 12px; margin-bottom: 20px; }
+      .btn-submit, .btn-save { width: 100%; justify-content: center; }
+      .modal-box { padding: 20px; }
+    }
+
   </style>
 </head>
 <body>

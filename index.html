@@ -163,12 +163,12 @@
 </head>
 <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
 
-    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white animate-fade-in-down">
+    <nav class="relative flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white animate-fade-in-down">
         <a href="index.html" class="cursor-pointer">
             <img src="assets/images/logo/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain hover:scale-105 transition-transform duration-300">
         </a>
 
-        <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
+        <ul id="desktop-menu" class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="startups.html">Startups</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="investor-brief.html">Investors</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="partners.html">Partners</a></li>
@@ -177,20 +177,39 @@
             <li class="cursor-pointer hover:text-brand transition pb-1 hover:pb-0 hover:border-b-2 hover:border-brand"><a href="contact-us.html">Contact</a></li>
         </ul>
 
-        <div class="flex items-center space-x-3">
+        <div class="hidden lg:flex items-center space-x-3">
             <a href="yc/yc-application.html" class="btn-shine bg-brand text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
                 Apply for Funding
             </a>
-            </div>
+        </div>
+
+        <button id="mobile-toggle" aria-label="Toggle menu" class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand">
+            <svg id="icon-menu" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg z-50">
+            <ul class="flex flex-col p-4 space-y-2 text-[15px] font-semibold text-gray-800">
+                <li class="hover:text-brand transition"><a href="startups.html" class="block py-2">Startups</a></li>
+                <li class="hover:text-brand transition"><a href="investor-brief.html" class="block py-2">Investors</a></li>
+                <li class="hover:text-brand transition"><a href="partners.html" class="block py-2">Partners</a></li>
+                <li class="hover:text-brand transition"><a href="events.html" class="block py-2">Events</a></li>
+                <li class="hover:text-brand transition"><a href="blog-insights.html" class="block py-2">News</a></li>
+                <li class="hover:text-brand transition"><a href="contact-us.html" class="block py-2">Contact</a></li>
+                <li class="pt-2">
+                    <a href="yc/yc-application.html" class="block text-center bg-brand text-white font-semibold py-3 rounded-md hover:bg-orange-600 transition">Apply for Funding</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <section class="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
-        <div class="flex flex-col lg:flex-row items-center gap-10 bg-[#f8f9fa] rounded-[40px] pl-10 lg:pl-16 pr-4 py-4 relative overflow-hidden">
+        <div class="flex flex-col lg:flex-row items-center gap-10 bg-[#f8f9fa] rounded-[28px] sm:rounded-[40px] p-6 sm:p-8 lg:pl-16 pr-4 py-4 relative overflow-hidden">
 
             <div class="absolute top-10 right-10 w-40 h-40 rounded-full bg-brand/10 blur-3xl animate-float"></div>
 
             <div class="flex-1 space-y-6 py-10 max-w-xl" data-aos="fade-right">
-                <h1 class="text-[40px] lg:text-[48px] font-extrabold leading-[1.1] tracking-tight text-black">
+                <h1 class="text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold leading-[1.1] tracking-tight text-black">
                     <span class="fade-word">N<span class="text-brand">X</span>T</span>
                     <span class="fade-word">turns</span>
                     <span class="fade-word">builders</span>
@@ -199,7 +218,7 @@
                     <span class="fade-word">formidable</span>
                     <span class="fade-word">founders</span>
                 </h1>
-                <p class="text-gray-700 text-[17px] leading-relaxed pr-8">
+                <p class="text-gray-700 text-[16px] sm:text-[17px] leading-relaxed pr-0 sm:pr-8">
                     Connecting visionary founders with investors, strategic partners, and growth opportunities to build the defining companies of tomorrow.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
@@ -300,7 +319,7 @@
 
         <div class="lg:col-span-7 flex flex-col h-full pt-4" data-aos="fade-left">
             <h4 class="text-brand text-[11px] font-bold tracking-widest uppercase mb-4">About NXT Fund</h4>
-            <h2 class="text-[44px] font-extrabold text-black mb-8 leading-tight">
+            <h2 class="text-[32px] sm:text-[44px] font-extrabold text-black mb-8 leading-tight">
                 Build For Founders<span class="text-brand">.</span>
             </h2>
 
@@ -334,8 +353,8 @@
         <div class="relative w-full min-h-[200px] rounded-[24px] overflow-hidden bg-white">
              <img src="assets/images/pages/index/ChatGPT Image Aug 29, 2026, 12_23_34 PM.png" alt="Campus Banner" class="absolute left-[15%] right-0 inset-y-0 w-[85%] h-full object-cover object-bottom">
              <div class="absolute left-0 inset-y-0 w-[30%] bg-white"></div>
-             <div class="absolute left-[30%] inset-y-0 w-56 bg-gradient-to-r from-white from-20% via-white/60 via-45% to-transparent"></div>
-             <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 p-8 pr-[290px]">
+             <div class="absolute left-[30%] inset-y-0 w-24 sm:w-56 bg-gradient-to-r from-white from-20% via-white/60 via-45% to-transparent"></div>
+             <div class="relative z-10 flex flex-col lg:flex-row items-start justify-between gap-8 p-6 sm:p-8">
                  <div>
                      <div class="flex flex-wrap gap-3 mb-5">
                          <a href="yc/yc-application.html" class="bg-brand text-white text-[14px] font-semibold py-3 px-5 rounded-md hover:bg-orange-600 transition flex items-center gap-2">
@@ -353,7 +372,7 @@
                      </div>
                  </div>
 
-                 <div class="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-[16px] p-4 flex items-center gap-4 shadow-lg w-[260px] border border-gray-100">
+                 <div class="bg-white rounded-[16px] p-4 flex items-center gap-4 shadow-lg w-[260px] border border-gray-100">
                      <div class="bg-red-50 w-12 h-12 rounded-lg flex items-center justify-center text-xl">
                          ??
                      </div>
@@ -405,7 +424,7 @@
     <section class="max-w-7xl mx-auto px-6 pt-12">
         <div class="relative w-full">
             <img src="assets/images/pages/index/ChatGPT Image Aug 29, 2026, 01_18_30 PM.png" alt="Global Skyline" class="w-full h-auto object-cover rounded-2xl">
-            <h2 class="absolute top-10 left-8 md:top-16 md:left-16 text-4xl md:text-5xl font-serif font-bold leading-tight max-w-lg drop-shadow-lg">
+            <h2 class="absolute top-6 left-6 sm:top-10 sm:left-8 md:top-16 md:left-16 text-3xl sm:text-4xl md:text-5xl font-serif font-bold leading-tight max-w-lg drop-shadow-lg">
                 <span class="text-white">Innovation has <br> no borders. <br></span>
                 <span class="text-brand">Neither should <br> access to <br> opportunity.</span>
             </h2>
@@ -905,6 +924,18 @@
             once: true,
             offset: 80
         });
+        (function () {
+            const toggle = document.getElementById('mobile-toggle');
+            const menu = document.getElementById('mobile-menu');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
+            if (!toggle || !menu) return;
+            toggle.addEventListener('click', () => {
+                const open = menu.classList.toggle('hidden') === false;
+                if (iconMenu) iconMenu.classList.toggle('hidden', open);
+                if (iconClose) iconClose.classList.toggle('hidden', !open);
+            });
+        })();
     </script>
 </body>
 </html>

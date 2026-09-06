@@ -37,12 +37,12 @@
 </head>
 <body class="text-brand-dark antialiased bg-white selection:bg-brand-orange selection:text-white">
 
-    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
+    <nav class="relative flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
         <a href="index.html" class="cursor-pointer">
             <img src="assets/images/logo/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain">
         </a>
 
-        <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
+        <ul id="desktop-menu" class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
             <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="startups.html">Startups</a></li>
             <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="investor-brief.html">Investors</a></li>
             <li class="border-b-2 border-[#F24E2B] text-black pb-1"><a href="partners.html">Partners</a></li>
@@ -51,17 +51,36 @@
             <li class="cursor-pointer hover:text-[#F24E2B] transition pb-1"><a href="contact-us.html">Contact</a></li>
         </ul>
 
-        <div class="flex items-center space-x-3">
+        <div id="desktop-cta" class="hidden lg:flex items-center space-x-3">
             <a href="yc/yc-application.html" class="bg-[#F24E2B] text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
                 Apply for Funding
             </a>
             </div>
+
+        <button id="mobile-toggle" aria-label="Toggle menu" class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand">
+            <svg id="icon-menu" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg z-50">
+            <ul class="flex flex-col p-4 space-y-2 text-[15px] font-semibold text-gray-800">
+                <li class="hover:text-brand transition"><a href="startups.html" class="block py-2">Startups</a></li>
+                <li class="hover:text-brand transition"><a href="investor-brief.html" class="block py-2">Investors</a></li>
+                <li class="hover:text-brand transition"><a href="partners.html" class="block py-2">Partners</a></li>
+                <li class="hover:text-brand transition"><a href="events.html" class="block py-2">Events</a></li>
+                <li class="hover:text-brand transition"><a href="blog-insights.html" class="block py-2">News</a></li>
+                <li class="hover:text-brand transition"><a href="contact-us.html" class="block py-2">Contact</a></li>
+                <li class="pt-2">
+                    <a href="yc/yc-application.html" class="block text-center bg-brand text-white font-semibold py-3 rounded-md hover:bg-orange-600 transition">Apply for Funding</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
-    <section class="max-w-[1200px] mx-auto px-8 py-16 flex flex-col md:flex-row items-center justify-between">
-        <div class="md:w-1/2 pr-8">
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-8 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="md:w-1/2 md:pr-8 text-center md:text-left">
             <h3 class="text-brand-orange font-bold text-sm tracking-wide uppercase mb-4">Partners</h3>
-            <h1 class="text-5xl font-bold leading-tight mb-6 tracking-tight text-gray-900">
+            <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-6 tracking-tight text-gray-900">
                 Stronger Partnerships.<br>Greater Impact<span class="text-brand-orange">.</span>
             </h1>
             <p class="text-gray-600 text-lg mb-8 max-w-md leading-relaxed">
@@ -78,8 +97,8 @@
         </div>
     </section>
 
-    <section class="max-w-[1200px] mx-auto px-8 mb-10">
-        <div class="flex flex-wrap justify-center space-x-2 md:space-x-8 border-b border-gray-200">
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-8 mb-10">
+        <div class="flex flex-wrap justify-center gap-x-2 gap-y-2 md:gap-x-8 border-b border-gray-200 overflow-x-auto">
             <button class="pb-4 text-sm font-semibold text-brand-orange border-b-2 border-brand-orange" data-filter="all">All Partners</button>
             <button class="pb-4 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors" data-filter="investor">Investors</button>
             <button class="pb-4 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors" data-filter="corporate">Corporates</button>
@@ -89,10 +108,10 @@
         </div>
     </section>
 
-    <section class="max-w-[1200px] mx-auto px-8 mb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-8 mb-16 md:mb-20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div class="border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center hover:shadow-lg transition-shadow bg-white" data-category="corporate technology">
+            <div class="border border-gray-100 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center hover:shadow-lg transition-shadow bg-white" data-category="corporate technology">
                 <img src="https://logo.clearbit.com/aws.amazon.com" alt="AWS" class="h-12 object-contain mb-6" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg'">
                 <h4 class="font-bold text-gray-900 mb-1">Amazon Web Services</h4>
                 <p class="text-xs font-semibold text-brand-orange mb-4">Cloud Partner</p>
@@ -255,10 +274,10 @@
         </div>
     </section>
 
-    <section class="max-w-[1200px] mx-auto px-8 mb-20">
-        <div class="bg-brand-lightOrange rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center mb-6 md:mb-0">
-                <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mr-6 shrink-0 border-4 border-white shadow-sm">
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-8 mb-16 md:mb-20">
+        <div class="bg-brand-lightOrange rounded-2xl p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left mb-6 md:mb-0">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-100 rounded-full flex items-center justify-center mr-0 sm:mr-6 mb-4 sm:mb-0 shrink-0 border-4 border-white shadow-sm">
                     <i class="fa-regular fa-handshake text-3xl text-brand-orange"></i>
                 </div>
                 <div>
@@ -354,6 +373,20 @@
                         }
                     });
                 });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const toggle = document.getElementById('mobile-toggle');
+            const menu = document.getElementById('mobile-menu');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
+            if (!toggle || !menu) return;
+            toggle.addEventListener('click', () => {
+                const open = menu.classList.toggle('hidden') === false;
+                if (iconMenu) iconMenu.classList.toggle('hidden', open);
+                if (iconClose) iconClose.classList.toggle('hidden', !open);
             });
         })();
     </script>

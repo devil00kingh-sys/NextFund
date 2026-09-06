@@ -582,16 +582,97 @@
       height: 14px;
       fill: #4b5563;
     }
+
+    /* ==== Responsive / Mobile ==== */
+    @media (max-width: 768px) {
+      .page-wrapper {
+        padding: 0 16px;
+      }
+      .hero {
+        flex-direction: column;
+        padding: 24px 0;
+        gap: 20px;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+      .hero-image {
+        width: 100%;
+        margin-top: 0;
+      }
+      .filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .tabs-list {
+        gap: 16px;
+        overflow-x: auto;
+        width: 100%;
+      }
+      .tab-item {
+        white-space: nowrap;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .search-input {
+        width: 100%;
+      }
+      .content-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+      .featured-img-box {
+        min-height: 200px;
+        order: -1;
+      }
+      .featured-info {
+        padding: 20px 18px;
+      }
+      .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 26px;
+      }
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+      }
+      .cta-mid-text {
+        max-width: 100%;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
 
-    <nav class="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
+    <nav class="relative flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto w-full bg-white">
         <a href="index.html" class="cursor-pointer">
             <img src="assets/images/logo/log1.png" alt="NXT Fund" class="h-16 w-auto object-contain">
         </a>
 
-        <ul class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
+        <ul id="desktop-menu" class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-gray-800">
             <li class="cursor-pointer hover:text-brand transition pb-1"><a href="startups.html">Startups</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1"><a href="investor-brief.html">Investors</a></li>
             <li class="cursor-pointer hover:text-brand transition pb-1"><a href="partners.html">Partners</a></li>
@@ -600,11 +681,30 @@
             <li class="cursor-pointer hover:text-brand transition pb-1"><a href="contact-us.html">Contact</a></li>
         </ul>
 
-        <div class="flex items-center space-x-3">
+        <div id="desktop-cta" class="hidden lg:flex items-center space-x-3">
             <a href="yc/yc-application.html" class="bg-brand text-white text-[15px] font-semibold py-2.5 px-6 rounded-md hover:bg-orange-600 transition">
                 Apply for Funding
             </a>
             </div>
+
+        <button id="mobile-toggle" aria-label="Toggle menu" class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand">
+            <svg id="icon-menu" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg z-50">
+            <ul class="flex flex-col p-4 space-y-2 text-[15px] font-semibold text-gray-800">
+                <li class="hover:text-brand transition"><a href="startups.html" class="block py-2">Startups</a></li>
+                <li class="hover:text-brand transition"><a href="investor-brief.html" class="block py-2">Investors</a></li>
+                <li class="hover:text-brand transition"><a href="partners.html" class="block py-2">Partners</a></li>
+                <li class="hover:text-brand transition"><a href="events.html" class="block py-2">Events</a></li>
+                <li class="hover:text-brand transition"><a href="blog-insights.html" class="block py-2">News</a></li>
+                <li class="hover:text-brand transition"><a href="contact-us.html" class="block py-2">Contact</a></li>
+                <li class="pt-2">
+                    <a href="yc/yc-application.html" class="block text-center bg-brand text-white font-semibold py-3 rounded-md hover:bg-orange-600 transition">Apply for Funding</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
   <div class="page-wrapper">
@@ -919,5 +1019,19 @@
         </div>
     </footer>
 
+<script>
+        (function () {
+            const toggle = document.getElementById('mobile-toggle');
+            const menu = document.getElementById('mobile-menu');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
+            if (!toggle || !menu) return;
+            toggle.addEventListener('click', () => {
+                const open = menu.classList.toggle('hidden') === false;
+                if (iconMenu) iconMenu.classList.toggle('hidden', open);
+                if (iconClose) iconClose.classList.toggle('hidden', !open);
+            });
+        })();
+    </script>
 </body>
 </html>
