@@ -32,7 +32,6 @@ nxtfund/
 ├── partners.html           # Partners section
 ├── events.html             # Events section
 ├── blog-insights.html      # News / Blog insights
-├── ecosystem-directory.html# Ecosystem directory
 ├── school.html             # School / education section
 ├── contact-us.html         # Contact us
 ├── terms-privacy.html      # Terms & privacy policy

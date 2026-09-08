@@ -644,8 +644,9 @@
             <div class="tab">Past Events</div>
         </section>
 
-        <section class="event-list">
-            
+        <section class="event-list" id="upcoming-events">
+            <!-- Dynamically rendered from /api/events -->
+
             <div class="event-card hover-lift" data-aos="fade-up" data-aos-delay="0">
                 <div class="event-date">
                     <span class="date-month">Aug</span>
@@ -705,7 +706,8 @@
 
         </section>
 
-        <section class="past-event-list hidden" data-aos="fade-up">
+        <section class="past-event-list hidden" data-aos="fade-up" id="past-events">
+            <!-- Dynamically rendered from /api/events -->
 
             <div class="event-card hover-lift" data-aos="fade-up" data-aos-delay="0">
                 <div class="event-date">
@@ -953,27 +955,23 @@
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
                 <li><a href="terms-privacy.html" class="hover:text-brand transition">Terms & Privacy</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-brand transition">About Us</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-brand transition">Contact Us</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="partners.html" class="hover:text-brand transition">Become a Partner</a></li>
-                <li class="text-gray-500">•</li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>Startup.nxtfund@gmail.com</span>
+                <span data-setting="contact_email">Startup.nxtfund@gmail.com</span>
             </div>
 
             <div class="flex justify-center gap-4 pt-2">
-                <a href="https://www.instagram.com/thenxtfund?stkn=bnY0enhtZzdnY2o=" aria-label="Instagram" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
+                <a data-social="instagram" href="https://www.instagram.com/thenxtfund?stkn=bnY0enhtZzdnY2o=" aria-label="Instagram" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5h8zm-4 6a3 3 0 100 6 3 3 0 000-6zm4.5-2.5h.01"></path></svg>
                 </a>
-                <a href="https://www.linkedin.com/company/celebso-venture/posts/?feedView=all" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
+                <a data-social="linkedin" href="https://www.linkedin.com/company/celebso-venture/posts/?feedView=all" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
                 </a>
                 <a href="#" aria-label="YouTube" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
@@ -985,13 +983,82 @@
             </div>
 
             <div class="text-[11px] text-gray-500 pt-6 border-t border-gray-900">
-                © 2026 Celebso. All rights reserved.
+                Ã‚Â© 2026 Celebso. All rights reserved.
             </div>
 
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        (function () {
+            const upcomingEl = document.getElementById('upcoming-events');
+            const pastEl = document.getElementById('past-events');
+            if (!upcomingEl || !pastEl) return;
+
+            const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            function esc(str) {
+                const d = document.createElement('div');
+                d.textContent = str == null ? '' : String(str);
+                return d.innerHTML;
+            }
+
+            function buildCard(ev, index, isPast) {
+                let month = '', day = '', year = '';
+                if (ev.date) {
+                    const parts = String(ev.date).split('-');
+                    if (parts.length === 3) {
+                        year = parts[0];
+                        month = MONTHS[parseInt(parts[1], 10) - 1] || '';
+                        day = String(parseInt(parts[2], 10));
+                    }
+                }
+                const location = ev.location || '';
+                const action = isPast
+                    ? '<span class="btn disabled">Completed</span>'
+                    : (ev.link && ev.link !== '#'
+                        ? '<a href="' + esc(ev.link) + '" target="_blank" rel="noopener" class="btn">Register Now</a>'
+                        : '<button class="btn">Register Now</button>');
+                const delay = (index % 7) * 100;
+                return '' +
+                    '<div class="event-card hover-lift" data-aos="fade-up" data-aos-delay="' + delay + '">' +
+                        '<div class="event-date">' +
+                            '<span class="date-month">' + month + '</span>' +
+                            '<span class="date-day">' + day + '</span>' +
+                            '<span class="date-year">' + year + '</span>' +
+                        '</div>' +
+                        '<div class="event-details">' +
+                            '<h3 class="event-title">' + esc(ev.title) + '</h3>' +
+                            '<div class="event-location"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>' + esc(location) + '</div>' +
+                            '<p class="event-desc">' + esc(ev.description || '') + '</p>' +
+                        '</div>' +
+                        '<div class="event-action">' + action + '</div>' +
+                    '</div>';
+            }
+
+            fetch('/api/events')
+                .then(function (r) { return r.json(); })
+                .then(function (events) {
+                    if (!Array.isArray(events) || !events.length) return;
+                    var upcoming = '';
+                    var past = '';
+                    var ui = 0, pi = 0;
+                    events.forEach(function (ev) {
+                        if (ev.type === 'past') {
+                            past += buildCard(ev, pi++, true);
+                        } else {
+                            upcoming += buildCard(ev, ui++, false);
+                        }
+                    });
+                    if (upcoming) upcomingEl.innerHTML = upcoming;
+                    else upcomingEl.innerHTML = '<p style="color:var(--text-gray);text-align:center;padding:20px;">No upcoming events right now.</p>';
+                    if (past) pastEl.innerHTML = past;
+                    if (window.AOS) AOS.refresh();
+                })
+                .catch(function () { /* keep hardcoded fallback */ });
+        })();
+    </script>
     <script>
         AOS.init({
             duration: 800,
@@ -1049,5 +1116,6 @@
             });
         })();
     </script>
+<script src="assets/js/settings.js"></script>
 </body>
 </html>

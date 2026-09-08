@@ -220,7 +220,7 @@
                     <span class="fade-word">formidable</span>
                     <span class="fade-word">founders</span>
                 </h1>
-                <p class="text-gray-700 text-[16px] sm:text-[17px] leading-relaxed pr-0 sm:pr-8">
+                <p class="text-gray-700 text-[16px] sm:text-[17px] leading-relaxed pr-0 sm:pr-8" data-setting="hero_subtitle">
                     Connecting visionary founders with investors, strategic partners, and growth opportunities to build the defining companies of tomorrow.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
@@ -270,7 +270,7 @@
         <div class="max-w-4xl mx-auto text-center space-y-6">
             <p class="text-gray-700 text-[15px] leading-relaxed">
                 In 2025, N<span class="text-[#F24E2B]">X</span>T FUND developed a new model of startup funding.
-                Four times a year we invest up to ₹100 Crore in a select group of
+                Four times a year we invest up to Ã¢â€šÂ¹100 Crore in a select group of
                 startups. Selected founders gain access to funding, incubation,
                 mentorship, and an extensive investor network, while working
                 closely with our team to get their companies into the best possible
@@ -455,7 +455,7 @@
         </div>
     </footer>
 
-    <section class="max-w-6xl mx-auto px-6 py-10">
+    <section class="max-w-6xl mx-auto px-6 py-10" id="home-event-section">
         <div class="bg-[#0B0E14] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl hover-lift" data-aos="zoom-in">
 
             <div class="w-full md:w-64 h-40 shrink-0 zoom-img rounded-xl">
@@ -468,24 +468,24 @@
                     <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
                     <span class="text-[10px] font-bold text-brand uppercase tracking-widest">Upcoming</span>
                 </div>
-                <h2 class="text-2xl font-bold mb-2">Celebso Founders Circle - Jaipur</h2>
-                <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                <h2 class="text-2xl font-bold mb-2" data-home-event="title">Celebso Founders Circle - Jaipur</h2>
+                <p class="text-gray-400 text-sm leading-relaxed max-w-md" data-home-event="desc">
                     An exclusive evening for founders to connect, collaborate and grow together.
                 </p>
                 <div class="flex flex-wrap items-center gap-6 mt-5 text-xs text-gray-400 font-medium">
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        20 Aug 2026
+                        <span data-home-event="date">20 Aug 2026</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        Jaipur, India
+                        <span data-home-event="location">Jaipur, India</span>
                     </div>
                 </div>
             </div>
 
             <div class="shrink-0 mt-4 md:mt-0">
-                <a href="https://allevents.in/jaipur/celebso-founders-circle-jaipur-tickets/80006319189371?ref=left-menu" target="_blank" class="border border-brand text-brand hover:bg-brand hover:text-white transition-colors duration-300 text-sm font-semibold py-2.5 px-6 rounded-lg flex items-center gap-2">
+                <a href="https://allevents.in/jaipur/celebso-founders-circle-jaipur-tickets/80006319189371?ref=left-menu" target="_blank" class="border border-brand text-brand hover:bg-brand hover:text-white transition-colors duration-300 text-sm font-semibold py-2.5 px-6 rounded-lg flex items-center gap-2" data-home-event="link">
                     Register <span>&rarr;</span>
                 </a>
             </div>
@@ -510,12 +510,13 @@
                     <h4 class="text-brand text-[10px] font-bold tracking-widest uppercase mb-2">Portfolio Spotlight</h4>
                     <h2 class="text-4xl font-extrabold text-black tracking-tight">Featured Startups</h2>
                 </div>
-                <a href="ecosystem-directory.html" class="text-sm font-bold text-gray-800 border-b-2 border-gray-800 pb-0.5 hover:text-brand hover:border-brand transition">
+                <a href="startups.html" class="text-sm font-bold text-gray-800 border-b-2 border-gray-800 pb-0.5 hover:text-brand hover:border-brand transition">
                     View All Companies
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch" id="home-featured-grid">
+                <!-- Dynamically rendered from /api/startups -->
 
                 <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col relative hover-lift" data-aos="fade-right">
                     <span class="absolute top-4 right-4 bg-brand text-white text-[10px] px-3 py-1.5 rounded-full uppercase font-bold tracking-wider z-10">
@@ -863,27 +864,23 @@
 
             <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-300 font-medium">
                 <li><a href="terms-privacy.html" class="hover:text-brand transition">Terms & Privacy</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="about.html" class="hover:text-brand transition">About Us</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="contact-us.html" class="hover:text-brand transition">Contact Us</a></li>
-                <li class="text-gray-500">•</li>
                 <li><a href="partners.html" class="hover:text-brand transition">Become a Partner</a></li>
-                <li class="text-gray-500">•</li>
             </ul>
 
             <div class="flex items-center justify-center gap-2 text-xs text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>Startup.nxtfund@gmail.com</span>
+                <span data-setting="contact_email">Startup.nxtfund@gmail.com</span>
             </div>
 
             <div class="flex justify-center gap-4 pt-2">
-                <a href="https://www.instagram.com/thenxtfund?stkn=bnY0enhtZzdnY2o=" aria-label="Instagram" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
+                <a data-social="instagram" href="https://www.instagram.com/thenxtfund?stkn=bnY0enhtZzdnY2o=" aria-label="Instagram" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5h8zm-4 6a3 3 0 100 6 3 3 0 000-6zm4.5-2.5h.01"></path></svg>
                 </a>
-                <a href="https://www.linkedin.com/company/celebso-venture/posts/?feedView=all" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
+                <a data-social="linkedin" href="https://www.linkedin.com/company/celebso-venture/posts/?feedView=all" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
                 </a>
                 <a href="#" aria-label="YouTube" class="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center hover:border-brand transition">
@@ -895,7 +892,7 @@
             </div>
 
             <div class="text-[11px] text-gray-500 pt-6 border-t border-gray-900">
-                © 2026 Celebso. All rights reserved.
+                Ã‚Â© 2026 Celebso. All rights reserved.
             </div>
 
         </div>
@@ -922,5 +919,92 @@
             });
         })();
     </script>
+    <script>
+        (function () {
+            function esc(str) {
+                var d = document.createElement('div');
+                d.textContent = str == null ? '' : String(str);
+                return d.innerHTML;
+            }
+
+            function fmtDate(dateStr) {
+                if (!dateStr) return '';
+                var m = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
+                if (!m) return '';
+                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                return String(parseInt(m[3], 10)) + ' ' + months[parseInt(m[2], 10) - 1] + ' ' + m[1];
+            }
+
+            // Upcoming event
+            fetch('/api/events')
+                .then(function (r) { return r.json(); })
+                .then(function (events) {
+                    if (!Array.isArray(events) || !events.length) return;
+                    var ev = null;
+                    var ordered = events.slice().sort(function (a, b) { return (a.date < b.date ? -1 : 1); });
+                    for (var i = 0; i < ordered.length; i++) {
+                        if (ordered[i].type !== 'past') { ev = ordered[i]; break; }
+                    }
+                    if (!ev && events.length) ev = events[events.length - 1];
+                    if (!ev) return;
+                    var t = document.querySelector('[data-home-event="title"]');
+                    var d = document.querySelector('[data-home-event="desc"]');
+                    var dt = document.querySelector('[data-home-event="date"]');
+                    var loc = document.querySelector('[data-home-event="location"]');
+                    var link = document.querySelector('[data-home-event="link"]');
+                    if (t) t.textContent = ev.title || '';
+                    if (d) d.textContent = ev.description || '';
+                    if (dt) dt.textContent = fmtDate(ev.date) + (ev.time ? ' â€¢ ' + ev.time : '');
+                    if (loc) loc.textContent = ev.location || '';
+                    if (link && ev.link && ev.link !== '#') link.setAttribute('href', ev.link);
+                })
+                .catch(function () { /* fallback */ });
+
+            // Featured Startups
+            var grid = document.getElementById('home-featured-grid');
+            if (grid) {
+                fetch('/api/startups')
+                    .then(function (r) { return r.json(); })
+                    .then(function (startups) {
+                        if (!Array.isArray(startups) || !startups.length) return;
+
+                        // Main featured card = ANTELLAY Space (fixed hero startup)
+                        var main = { name: 'ANTELLAY Space', description: 'AI brain for satellites and space missions', image: 'assets/images/pages/index/WhatsApp Image 2026-09-03 at 9.48.57 PM.jpeg', tags: ['AI/ML', 'SpaceTech'] };
+                        var mainTags = main.tags.map(function (c) { return '<span class="bg-gray-100 text-gray-600 px-3 py-1 rounded text-xs font-bold">' + esc(c) + '</span>'; }).join('');
+
+                        var html = '<div class="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col relative hover-lift" data-aos="fade-right">' +
+                            '<span class="absolute top-4 right-4 bg-brand text-white text-[10px] px-3 py-1.5 rounded-full uppercase font-bold tracking-wider z-10">Portfolio</span>' +
+                            '<img src="' + main.image + '" alt="' + esc(main.name) + '" class="w-full h-[340px] object-cover">' +
+                            '<div class="p-8 flex-1 flex flex-col justify-center">' +
+                                '<h3 class="text-2xl font-bold text-black mb-2">' + esc(main.name) + '</h3>' +
+                                '<p class="text-gray-500 text-sm leading-relaxed max-w-xl">' + esc(main.description) + '</p>' +
+                                '<div class="flex gap-2 mt-5">' + mainTags + '</div>' +
+                            '</div>' +
+                        '</div>';
+
+                        // Side cards: pinned VOLIMY + pinned NumeriXX.ai
+                        var numerixx = { name: 'NumeriXX.ai', description: 'AI-powered Personal Pattern Intelligence', image: 'assets/images/pages/index/ChatGPT Image Aug 29, 2026, 01_44_16 PM.png' };
+                        var picards = [volimy, numerixx];
+
+                        var side = '';
+                        picards.forEach(function (p, i) {
+                            side += '<div class="bg-white rounded-2xl shadow-sm flex flex-1 overflow-hidden relative hover-lift" data-aos="fade-left" data-aos-delay="' + ((i + 1) * 100) + '">' +
+                                '<img src="' + p.image + '" alt="' + esc(p.name) + '" class="w-[45%] object-cover">' +
+                                '<div class="p-5 flex flex-col justify-center pr-10 w-full">' +
+                                    '<h3 class="text-lg font-bold text-black mb-1.5">' + esc(p.name) + '</h3>' +
+                                    '<p class="text-xs text-gray-500 leading-relaxed">' + esc(p.description) + '</p>' +
+                                '</div>' +
+                            '</div>';
+                        });
+
+                        html += '<div class="lg:col-span-4 flex flex-col gap-6">' + side + '</div>';
+                        grid.innerHTML = html;
+                        if (window.AOS) AOS.refresh();
+                    })
+                    .catch(function () { /* fallback */ });
+            }
+        })();
+    </script>
+<script src="assets/js/settings.js"></script>
 </body>
 </html>
