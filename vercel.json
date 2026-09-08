@@ -4,7 +4,8 @@
     { "src": "api/index.js", "use": "@vercel/node", "config": { "includeFiles": ["app.js", "routes/**", "database/**"] } },
     { "src": "yc/**/*.html", "use": "@vercel/static" },
     { "src": "assets/**/*", "use": "@vercel/static" },
-    { "src": "*.html", "use": "@vercel/static" }
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "favicon.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.js" },
