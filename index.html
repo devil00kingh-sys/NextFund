@@ -927,39 +927,6 @@
                 return d.innerHTML;
             }
 
-            function fmtDate(dateStr) {
-                if (!dateStr) return '';
-                var m = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
-                if (!m) return '';
-                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                return String(parseInt(m[3], 10)) + ' ' + months[parseInt(m[2], 10) - 1] + ' ' + m[1];
-            }
-
-            // Upcoming event
-            fetch('/api/events')
-                .then(function (r) { return r.json(); })
-                .then(function (events) {
-                    if (!Array.isArray(events) || !events.length) return;
-                    var ev = null;
-                    var ordered = events.slice().sort(function (a, b) { return (a.date < b.date ? -1 : 1); });
-                    for (var i = 0; i < ordered.length; i++) {
-                        if (ordered[i].type !== 'past') { ev = ordered[i]; break; }
-                    }
-                    if (!ev && events.length) ev = events[events.length - 1];
-                    if (!ev) return;
-                    var t = document.querySelector('[data-home-event="title"]');
-                    var d = document.querySelector('[data-home-event="desc"]');
-                    var dt = document.querySelector('[data-home-event="date"]');
-                    var loc = document.querySelector('[data-home-event="location"]');
-                    var link = document.querySelector('[data-home-event="link"]');
-                    if (t) t.textContent = ev.title || '';
-                    if (d) d.textContent = ev.description || '';
-                    if (dt) dt.textContent = fmtDate(ev.date) + (ev.time ? ' â€¢ ' + ev.time : '');
-                    if (loc) loc.textContent = ev.location || '';
-                    if (link && ev.link && ev.link !== '#') link.setAttribute('href', ev.link);
-                })
-                .catch(function () { /* fallback */ });
-
             // Featured Startups
             var grid = document.getElementById('home-featured-grid');
             if (grid) {
