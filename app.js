@@ -1,82 +1,38 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
-const { getDb } = require('./database/setup');
 
 const app = express();
 
 app.use(cors());
-
-// Lightweight body parser (avoids body-parser/iconv-lite, which break on Workers)
-async function parseBody(req, res, next) {
-  const ct = (req.headers['content-type'] || '').split(';')[0].trim();
-  if (ct === 'multipart/form-data') {
-    req.body = {};
-    return next();
-  }
-  const chunks = [];
-  for await (const chunk of req) chunks.push(chunk);
-  const raw = Buffer.concat(chunks).toString('utf8');
-  if (ct === 'application/json') {
-    try {
-      req.body = raw ? JSON.parse(raw) : {};
-    } catch (e) {
-      req.body = {};
-    }
-  } else if (ct === 'application/x-www-form-urlencoded') {
-    req.body = {};
-    const params = new URLSearchParams(raw);
-    params.forEach((value, key) => { req.body[key] = value; });
-  } else {
-    req.body = {};
-  }
-  next();
-}
-
-app.use(parseBody);
+app.use(
+  express.json({ limit: '20mb' })
+);
+app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 100 * 1024 * 1024 } });
 
-// ===== File upload via R2 =====
-app.post('/api/upload', upload.single('file'), async (req, res) => {
+app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+
   const filename = Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-');
 
   try {
-    const bucket = req.app?.locals?.cfEnv?.UPLOADS_BUCKET;
-    if (bucket) {
-      await bucket.put(filename, req.file.buffer, {
-        httpMetadata: { contentType: req.file.mimetype || 'application/octet-stream' }
-      });
-      return res.json({ filename, path: `/api/files/${filename}` });
-    }
-    // Local dev: save to memory fallback (no filesystem in Workers)
-    return res.json({ filename, path: `/api/files/${filename}` });
-  } catch (err) {
-    console.error('Upload error:', err);
+    const uploadsDir = process.env.NODE_ENV === 'production'
+      ? path.join(require('os').tmpdir())
+      : path.join(__dirname, 'assets', 'uploads');
+    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+    const filePath = path.join(uploadsDir, filename);
+    fs.writeFileSync(filePath, req.file.buffer);
+    return res.json({ filename, path: `/assets/uploads/${filename}` });
+  } catch (writeErr) {
     return res.status(500).json({ error: 'Upload failed' });
   }
 });
 
-// ===== Serve uploaded files from R2 =====
-app.get('/api/files/:filename', async (req, res) => {
-  try {
-    const bucket = req.app?.locals?.cfEnv?.UPLOADS_BUCKET;
-    if (!bucket) return res.status(404).send('Storage not configured');
-    const object = await bucket.get(req.params.filename);
-    if (!object) return res.status(404).send('File not found');
-    const headers = new Headers();
-    object.writeHttpMetadata(headers);
-    headers.set('etag', object.httpEtag);
-    headers.set('Cache-Control', 'public, max-age=31536000');
-    return new Response(object.body, { headers });
-  } catch (err) {
-    return res.status(404).send('File not found');
-  }
-});
-
-// ===== API Routes =====
 const applicationRoutes = require('./routes/applications');
 const eventRoutes = require('./routes/events');
 const blogRoutes = require('./routes/blogs');
@@ -85,6 +41,7 @@ const partnerRoutes = require('./routes/partners');
 const contactRoutes = require('./routes/contacts');
 const { router: authRoutes } = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const { getDb } = require('./database/setup');
 
 app.use('/api/applications', applicationRoutes);
 app.use('/api/events', eventRoutes);
@@ -93,7 +50,6 @@ app.use('/api/startups', startupRoutes);
 app.use('/api/partners', partnerRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/auth', authRoutes);
-
 app.get('/api/settings', async (req, res) => {
   try {
     const db = await getDb();
@@ -105,7 +61,26 @@ app.get('/api/settings', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
 app.use('/api/admin', adminRoutes);
+
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/yc', express.static(path.join(__dirname, 'yc')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
+app.get('*', (req, res) => {
+  const filePath = path.join(__dirname, req.path);
+  if (filePath.endsWith('.html') && fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).send('Page not found');
+  }
+});
 
 module.exports = app;

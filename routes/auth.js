@@ -1,11 +1,19 @@
 const express = require('express');
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const { getDb } = require('../database/setup');
 
 const SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
 const DEFAULT_PASSWORD = 'admin123';
-const getSecret = () => process.env.JWT_SECRET || process.env.ADMIN_PASSWORD || 'nxtfund_serverless_secret_key';
+const SECRET = process.env.JWT_SECRET || process.env.ADMIN_PASSWORD || 'nxtfund_serverless_secret_key';
+
+let envPassword = process.env.ADMIN_PASSWORD || null;
 let memoryPassword = null;
+
+if (!process.env.ADMIN_PASSWORD) {
+  console.warn('[auth] ADMIN_PASSWORD not set in environment - password will come from the database or default "admin123"');
+}
 
 // ---------- Password hashing (scrypt + salt) ----------
 
@@ -36,7 +44,7 @@ async function getStoredPasswordDoc() {
 }
 
 function checkEnvPassword(password) {
-  const current = memoryPassword || process.env.ADMIN_PASSWORD;
+  const current = memoryPassword || envPassword;
   return !!current && password === current;
 }
 
@@ -48,7 +56,19 @@ async function checkAdminPassword(password) {
 }
 
 function persistAdminPasswordLocal(newPassword) {
-  return;
+  try {
+    const envPath = path.join(__dirname, '..', '.env');
+    if (!fs.existsSync(envPath)) return;
+    let content = fs.readFileSync(envPath, 'utf8');
+    if (/^ADMIN_PASSWORD=.*$/m.test(content)) {
+      content = content.replace(/^ADMIN_PASSWORD=.*$/m, `ADMIN_PASSWORD=${newPassword}`);
+    } else {
+      content += `\nADMIN_PASSWORD=${newPassword}\n`;
+    }
+    fs.writeFileSync(envPath, content);
+  } catch (err) {
+    console.error('[auth] Failed to persist password to .env', err);
+  }
 }
 
 async function changeAdminPassword(newPassword) {
@@ -71,7 +91,7 @@ async function changeAdminPassword(newPassword) {
 
 function createToken() {
   const payload = Buffer.from(JSON.stringify({ exp: Date.now() + SESSION_TTL })).toString('base64url');
-  const sig = crypto.createHmac('sha256', getSecret()).update(payload).digest('base64url');
+  const sig = crypto.createHmac('sha256', SECRET).update(payload).digest('base64url');
   return payload + '.' + sig;
 }
 
@@ -79,7 +99,7 @@ function verifyToken(token) {
   if (!token || typeof token !== 'string') return false;
   const parts = token.split('.');
   if (parts.length !== 2) return false;
-  const expected = crypto.createHmac('sha256', getSecret()).update(parts[0]).digest('base64url');
+  const expected = crypto.createHmac('sha256', SECRET).update(parts[0]).digest('base64url');
   const a = Buffer.from(parts[1]);
   const b = Buffer.from(expected);
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return false;
