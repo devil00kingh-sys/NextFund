@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node -r ./dns-fallback.js server.js",
     "dev": "node -r ./dns-fallback.js server.js",
-    "dev:pages": "wrangler pages dev --compatibility-date=2026-08-04 --compatibility-flags nodejs_compat",
-    "build": "echo \"Static site - no build step needed\" && exit 0",
-    "deploy:pages": "npx wrangler pages deploy . --branch main",
+    "dev:worker": "wrangler dev --port 8799",
+    "build": "node scripts/build-assets.js",
+    "deploy": "npm run build && npx wrangler deploy --minify",
     "seed": "node database/seed.js",
     "r2:create": "npx wrangler r2 bucket create nxtfund-uploads"
   },

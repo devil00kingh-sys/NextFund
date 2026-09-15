@@ -1,24 +1,28 @@
 const { MongoClient, ObjectId } = require('mongodb');
 
-const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) {
-  throw new Error('MONGODB_URI environment variable is required');
-}
-
-const DB_NAME = process.env.MONGODB_DB || 'nxtfund';
-
-const client = new MongoClient(MONGODB_URI, {
-  serverSelectionTimeoutMS: 5000,
-  connectTimeoutMS: 10000,
-});
-
+let client = null;
 let db = null;
 let connected = false;
 
+function getClient() {
+  if (client) return client;
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error('MONGODB_URI environment variable is required');
+  }
+  client = new MongoClient(uri, {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 10000,
+  });
+  return client;
+}
+
 async function connect() {
   if (connected && db) return db;
-  await client.connect();
-  db = client.db(DB_NAME);
+  const c = getClient();
+  await c.connect();
+  const dbName = process.env.MONGODB_DB || 'nxtfund';
+  db = c.db(dbName);
   connected = true;
   return db;
 }

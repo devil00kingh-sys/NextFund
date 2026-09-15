@@ -1,11 +1,21 @@
 name = "nxtfund"
+main = "src/index.js"
 compatibility_date = "2026-08-04"
 compatibility_flags = ["nodejs_compat", "enable_nodejs_http_modules", "enable_nodejs_http_server_modules"]
+account_id = "d419822236c09605e120c0d2b31a6000"
 
-# Pages project config
-# Deploy with: npx wrangler pages deploy .
+# Static assets (HTML, CSS, images, yc/*) served by Cloudflare
+[assets]
+directory = "./dist"
+binding = "ASSETS"
 
 # R2 bucket for file uploads
 [[r2_buckets]]
 binding = "UPLOADS_BUCKET"
 bucket_name = "nxtfund-uploads"
+
+[vars]
+MONGODB_URI = "mongodb+srv://veer2580jag_db_user:veer123@cluster0.gfzuufh.mongodb.net/?appName=Cluster0"
+MONGODB_DB = "nxtfund"
+ADMIN_PASSWORD = "nxtfund2026"
+JWT_SECRET = "nxtfund_serverless_secret_key"

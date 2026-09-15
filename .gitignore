@@ -7,5 +7,6 @@ database/nxtfund.db
 .wrangler/
 .vscode/
 assets/uploads/
+dist/
 
 desktop.ini
