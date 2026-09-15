@@ -1,7 +1,5 @@
 const express = require('express');
 const crypto = require('crypto');
-const fs = require('fs');
-const path = require('path');
 const { getDb } = require('../database/setup');
 
 const SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
@@ -56,19 +54,7 @@ async function checkAdminPassword(password) {
 }
 
 function persistAdminPasswordLocal(newPassword) {
-  try {
-    const envPath = path.join(__dirname, '..', '.env');
-    if (!fs.existsSync(envPath)) return;
-    let content = fs.readFileSync(envPath, 'utf8');
-    if (/^ADMIN_PASSWORD=.*$/m.test(content)) {
-      content = content.replace(/^ADMIN_PASSWORD=.*$/m, `ADMIN_PASSWORD=${newPassword}`);
-    } else {
-      content += `\nADMIN_PASSWORD=${newPassword}\n`;
-    }
-    fs.writeFileSync(envPath, content);
-  } catch (err) {
-    console.error('[auth] Failed to persist password to .env', err);
-  }
+  return;
 }
 
 async function changeAdminPassword(newPassword) {

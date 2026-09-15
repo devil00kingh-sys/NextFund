@@ -3,6 +3,9 @@
 node_modules/
 database/nxtfund.db
 .env
+.dev.vars
+.wrangler/
+.vscode/
 assets/uploads/
 
 desktop.ini
